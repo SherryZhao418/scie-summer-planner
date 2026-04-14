@@ -853,31 +853,28 @@ const WEEKS = [
     ]
   },
   {
-    num: 3, title: "Algebra 上", date: "4.28 - 5.4", phase: 1,
+    num: 3, title: "Algebra 上 + 🇯🇵北海道", date: "4.28 - 5.4", phase: 1,
     tasks: [
       { subj: "math", text: "展开括号（Expanding Brackets）", key: true },
       { subj: "math", text: "化简代数式（Simplifying）" },
       { subj: "math", text: "因式分解——提公因式法", key: true },
-      { subj: "math", text: "因式分解——十字相乘法" },
-      { subj: "math", text: "每天10道代数练习" },
-      { subj: "eng", text: "TOEFL词汇累计400+" },
-      { subj: "eng", text: "英语歌精听3首新歌" },
+      { subj: "eng", text: "TOEFL词汇累计400+（旅途中用APP碎片学）" },
+      { subj: "eng", text: "英语歌精听2首新歌（飞机上听）" },
       { subj: "eng", text: "第一本英文书读完 + 写3句读后感" },
-      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "act", text: "🇯🇵 北海道旅行见闻：拍照+写英文日记 ✈️", fun: true },
       { subj: "act", text: "头脑风暴暑期活动项目方向" },
     ]
   },
   {
-    num: 4, title: "Algebra 下", date: "5.5 - 5.11", phase: 1,
+    num: 4, title: "🇯🇵北海道 + Algebra 下", date: "5.5 - 5.11", phase: 1,
     tasks: [
-      { subj: "math", text: "一元一次方程 + 一元二次方程", key: true },
+      { subj: "act", text: "🇯🇵 北海道最后两天：享受旅行！放松为主", fun: true },
+      { subj: "act", text: "整理旅行照片+写一篇英文游记（回来后）" },
+      { subj: "math", text: "一元一次方程 + 一元二次方程（回来后恢复）", key: true },
       { subj: "math", text: "联立方程（消元法+代入法）", key: true },
-      { subj: "math", text: "每天10道方程练习题" },
       { subj: "eng", text: "TOEFL词汇累计600+" },
       { subj: "eng", text: "启动第二本书 Tuesdays with Morrie" },
-      { subj: "eng", text: "每天看1个 TED-Ed 视频（5-10min）" },
-      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
-      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "piano", text: "🎹 钢琴练习 2次 × 30min（回来后恢复）" },
     ]
   },
   {
@@ -932,7 +929,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 9, title: "统计与概率", date: "6.8 - 6.14", phase: 2,
+    num: 9, title: "统计与概率 + 出发准备", date: "6.8 - 6.14", phase: 2,
     tasks: [
       { subj: "math", text: "平均数/中位数/众数 + 频率直方图" },
       { subj: "math", text: "概率计算 + 树状图" },
@@ -941,74 +938,76 @@ const WEEKS = [
       { subj: "sci", text: "物理预习：Energy（能量转化）" },
       { subj: "sci", text: "化学术语背诵（每周1小时）" },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "act", text: "🇺🇸 准备美国旅行：英文日记模板、必备APP", key: true },
     ]
   },
   {
-    num: 10, title: "全模块复习", date: "6.15 - 6.21", phase: 2,
+    num: 10, title: "🇺🇸 圆石滩·出发", date: "6.15 - 6.21", phase: 2,
     tasks: [
-      { subj: "math", text: "数学全模块错题复盘", key: true },
-      { subj: "math", text: "做1套完整 IGCSE 模拟卷" },
-      { subj: "eng", text: "TOEFL口语录音练习 Task 1" },
-      { subj: "eng", text: "第三本英文书完成" },
-      { subj: "eng", text: "第三首完整学会的英文歌 🎵", fun: true },
-      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
-      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "math", text: "出发前：数学全模块错题快速复盘", key: true },
+      { subj: "eng", text: "TOEFL口语录音练习 Task 1（出发前完成）" },
+      { subj: "eng", text: "第三本英文书完成（或带上飞机读）" },
+      { subj: "act", text: "🇺🇸 圆石滩出发！开启一个月美国之旅 ✈️", fun: true },
+      { subj: "eng", text: "到达后：全英文环境沉浸！主动和当地人交流", fun: true },
+      { subj: "eng", text: "开始写英文旅行日记（每天3-5句就行）" },
     ]
   },
   {
-    num: 11, title: "TOEFL 模考", date: "6.22 - 6.28", phase: 2,
+    num: 11, title: "🇺🇸 圆石滩·Week 2", date: "6.22 - 6.28", phase: 2,
     tasks: [
-      { subj: "math", text: "每天5道混合题保持手感" },
-      { subj: "eng", text: "TPO 完整模考1套（4科全做）", key: true },
-      { subj: "eng", text: "分析模考弱项，制定针对性计划" },
-      { subj: "eng", text: "启动第四本书" },
-      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
-      { subj: "act", text: "活动项目：内容已有一定积累" },
+      { subj: "eng", text: "每天用英文和当地人对话至少3次 🗣️", fun: true },
+      { subj: "eng", text: "Magoosh词汇：每天15词（碎片时间）" },
+      { subj: "eng", text: "英文旅行日记持续写（记录有趣的表达）" },
+      { subj: "eng", text: "逛一家当地书店，买一本感兴趣的英文书 📚", fun: true },
+      { subj: "math", text: "轻量数学：每天3道混合题保持手感（用APP）" },
+      { subj: "act", text: "拍摄旅行Vlog素材（可以做成活动项目内容）" },
     ]
   },
   {
-    num: 12, title: "弱项突破", date: "6.29 - 7.5", phase: 2,
+    num: 12, title: "🇺🇸 圆石滩·Week 3", date: "6.29 - 7.5", phase: 2,
     tasks: [
-      { subj: "eng", text: "TOEFL 弱项强化（阅读/听力/口语/写作）", key: true },
-      { subj: "math", text: "数学保持每天5道题" },
-      { subj: "sci", text: "物理预习：Waves（波 = 声波 = 音乐🎵）" },
-      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
-      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
-      { subj: "act", text: "如有旅行计划：准备英文日记模板 ✈️", fun: true },
+      { subj: "eng", text: "全英文点餐/问路/购物——实战口语 🗣️", fun: true },
+      { subj: "eng", text: "Magoosh词汇保持：每天15词" },
+      { subj: "eng", text: "英文旅行日记持续" },
+      { subj: "eng", text: "🎵 找一首在美国听到的歌，精听学会它", fun: true },
+      { subj: "math", text: "轻量数学：每天3道题（不用多，保手感就行）" },
+      { subj: "act", text: "🎆 7.4独立日！体验美国文化，写观察笔记", fun: true },
     ]
   },
   {
-    num: 13, title: "二次模考", date: "7.6 - 7.12", phase: 2,
+    num: 13, title: "🇺🇸 圆石滩·Week 4", date: "7.6 - 7.12", phase: 2,
     tasks: [
-      { subj: "eng", text: "TPO 模考第2套", key: true },
-      { subj: "eng", text: "对比两次模考成绩，记录进步" },
-      { subj: "math", text: "做1套 IGCSE 真题卷" },
-      { subj: "eng", text: "TOEFL词汇累计2000+" },
-      { subj: "eng", text: "第四本英文书完成" },
-      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "eng", text: "口语挑战：用英文完整描述一天的行程（录音）" },
+      { subj: "eng", text: "TOEFL词汇累计2000+（旅途积累也算！）" },
+      { subj: "eng", text: "英文旅行日记——写一篇最难忘的经历（200字+）", key: true },
+      { subj: "math", text: "轻量数学保持" },
+      { subj: "act", text: "整理旅行素材：照片/视频/日记/感悟" },
+      { subj: "act", text: "思考：这次旅行可以怎么融入申请文书？💡" },
     ]
   },
   {
-    num: 14, title: "选课研究", date: "7.13 - 7.19", phase: 3,
+    num: 14, title: "🇺🇸 回国·恢复节奏", date: "7.13 - 7.19", phase: 3,
     tasks: [
+      { subj: "act", text: "🇺🇸 圆石滩最后几天，享受旅程！", fun: true },
+      { subj: "act", text: "整理一个月的英文旅行日记，选最好的5篇", key: true },
       { subj: "act", text: "研究深国交G1课程设置和选课规则", key: true },
       { subj: "act", text: "初步确定 IGCSE 选课方向" },
-      { subj: "eng", text: "练习学术写作 Essay Structure" },
-      { subj: "eng", text: "找人用英文讨论一个话题（口语练习）" },
-      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
-      { subj: "math", text: "数学保持做题" },
-      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "math", text: "回国后恢复数学：做一套真题找回状态", key: true },
+      { subj: "eng", text: "把旅行中学到的地道表达整理成词汇表" },
+      { subj: "piano", text: "🎹 钢琴恢复练习 2次 × 30min" },
     ]
   },
   {
-    num: 15, title: "全英适应", date: "7.20 - 7.26", phase: 3,
+    num: 15, title: "全英冲刺·恢复全速", date: "7.20 - 7.26", phase: 3,
     tasks: [
       { subj: "math", text: "用纯英文做 IGCSE 数学题（模拟上课）", key: true },
+      { subj: "math", text: "数学全模块最终测评", key: true },
+      { subj: "eng", text: "TPO 完整模考1套（回国后摸底）", key: true },
+      { subj: "eng", text: "启动第五本书 The Great Gatsby" },
+      { subj: "sci", text: "物理预习：Waves（波 = 声波 = 音乐🎵）" },
       { subj: "act", text: "看学长学姐分享（公众号/小红书/B站）" },
       { subj: "act", text: "列出想尝试的社团清单" },
-      { subj: "eng", text: "启动第五本书 The Great Gatsby" },
-      { subj: "math", text: "数学全模块最终测评", key: true },
-      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min（全面恢复）" },
     ]
   },
   {
