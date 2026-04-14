@@ -188,31 +188,12 @@ body{font-family:'Nunito',-apple-system,BlinkMacSystemFont,sans-serif;background
 
 <!-- Tabs for other content -->
 <div class="tabs">
-  <div class="tab" data-t="daily" onclick="sw('daily')">⏰ 作息表</div>
   <div class="tab" data-t="songs" onclick="sw('songs')">🎵 歌单</div>
   <div class="tab" data-t="films" onclick="sw('films')">🎬 电影</div>
   <div class="tab" data-t="books" onclick="sw('books')">📚 书单</div>
   <a class="tab" href="resources.html" style="text-decoration:none;color:var(--dim);">📦 资源包</a>
 </div>
 
-<div class="sec" id="secDaily">
-  <div class="scard"><h3>☀️ 上午（2.5h）</h3>
-    <div class="tb"><div class="tl">09:00</div><div class="td" style="background:#e17055"></div><div class="tc"><div class="tt">🔢 数学 90min</div><div class="tdesc">教材→做题→错题记录</div></div></div>
-    <div class="tb"><div class="tl">10:45</div><div class="td" style="background:#0984e3"></div><div class="tc"><div class="tt">📖 词汇书 1 Chapter</div><div class="tdesc">Magoosh / TOEFL词以类记</div></div></div>
-    <div class="tb"><div class="tl">11:15</div><div class="td" style="background:#0984e3"></div><div class="tc"><div class="tt">🇬🇧 英语阅读/精听</div><div class="tdesc">BBC / 原版书 / 英文歌</div></div></div>
-  </div>
-  <div class="scard"><h3>🌤️ 下午（2.5h）</h3>
-    <div class="tb"><div class="tl">14:00</div><div class="td" style="background:#0984e3"></div><div class="tc"><div class="tt">🎵 英语歌/TED + 阅读</div><div class="tdesc">歌词听写跟唱 + 英文书</div></div></div>
-    <div class="tb"><div class="tl">15:00</div><div class="td" style="background:#fdcb6e"></div><div class="tc"><div class="tt">🎨 活动/理化/自由探索</div><div class="tdesc">物理视频/项目/Vlog</div></div></div>
-    <div class="tb"><div class="tl">16:00</div><div class="td" style="background:#06b6d4"></div><div class="tc"><div class="tt">🏃 运动 30-45min</div><div class="tdesc">慢跑3km / 健身房撸铁 / 跑步机 / 游泳 / 球类</div></div></div>
-  </div>
-  <div class="scard"><h3>🌙 晚上</h3>
-    <div class="tb"><div class="tl">19:30</div><div class="td" style="background:#f472b6"></div><div class="tc"><div class="tt">🎤 演讲/辩论 20min</div><div class="tdesc">看TED/辩论视频 或 即兴英文演讲（每周2-3次）</div></div></div>
-    <div class="tb"><div class="tl">20:00</div><div class="td" style="background:#a29bfe"></div><div class="tc"><div class="tt">🎹 钢琴 30min</div></div></div>
-    <div class="tb"><div class="tl">21:00</div><div class="td" style="background:#0984e3"></div><div class="tc"><div class="tt">📖 睡前阅读</div></div></div>
-  </div>
-  <div class="scard"><h3>💡 提醒</h3><div style="font-size:12px;color:var(--dim);line-height:1.6">• 每天5h有效学习 + 运动 + 放松<br>• <b style="color:var(--accent)">词汇书每天1 Chapter</b>雷打不动<br>• <b style="color:#06b6d4">运动是刚需</b>不是可选——大脑需要氧气🧠<br>• 演讲辩论<b style="color:#f472b6">每周2-3次</b>，不用每天<br>• 周末至少一天完全放松🎢<br>• 数学<b style="color:var(--red)">写完整英文步骤</b></div></div>
-</div>
 <div class="sec" id="secSongs"><div id="songList"></div></div>
 <div class="sec" id="secFilms"><div id="filmList"></div></div>
 <div class="sec" id="secBooks"><div id="bookList"></div></div>
@@ -292,6 +273,20 @@ function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCal();
 function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCal();}
 
 function render(){renderToday();renderStats();renderCal();if(selDay)renderDetail(selDay);rSongs();rBooks();rFilms();}
+// Schedule templates
+function getSchedule(d){
+  const t=tv(d),we=dow(d)>=6;
+  if(t) return t.n==='圆石滩'
+    ? [{time:'自由',icon:'🏄',title:'旅行+运动',desc:'海边跑步/冲浪/徒步'},{time:'碎片',icon:'📖',title:'词汇+日记',desc:'1 Chapter + 英文日记'},{time:'随时',icon:'🗣️',title:'英文对话',desc:'和当地人交流'}]
+    : [{time:'自由',icon:'🚶',title:'旅行探索',desc:'步行/徒步/拍照'},{time:'碎片',icon:'📖',title:'词汇+日记',desc:'1 Chapter + 英文日记'}];
+  if(we) return [{time:'自由',icon:'📖',title:'词汇+阅读',desc:'1 Chapter + 英文书'},{time:'下午',icon:'🏃',title:'运动 45min',desc:'跑步/球类/游泳（周末加量）'},{time:'晚上',icon:'🎹',title:'钢琴+放松',desc:'练琴 / 看电影 / 完全休息'}];
+  return [{time:'9:00',icon:'🔢',title:'数学 90min',desc:'教材→做题→错题'},{time:'10:45',icon:'📖',title:'词汇+英语 60min',desc:'1 Chapter + 阅读/精听'},{time:'14:00',icon:'🎵',title:'英语歌/TED+书 60min',desc:'精听跟唱 + 英文书'},{time:'15:00',icon:'🎨',title:'活动/理化 60min',desc:'物理/项目/Vlog'},{time:'16:00',icon:'🏃',title:'运动 30min',desc:'慢跑/健身/游泳'},{time:'19:30',icon:'🎤',title:'演讲/辩论 20min',desc:'TED/即兴演讲（周2-3次）'},{time:'20:00',icon:'🎹',title:'钢琴 30min',desc:''},{time:'21:00',icon:'📖',title:'睡前阅读',desc:''}];
+}
+function scheduleHtml(d){
+  const s=getSchedule(d);
+  return `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed var(--border);">${s.map(x=>`<div style="display:flex;align-items:center;gap:4px;padding:3px 8px;background:rgba(0,0,0,0.03);border-radius:8px;font-size:10px;"><span>${x.icon}</span><span style="color:var(--dim);">${x.time}</span><b>${x.title}</b></div>`).join('')}</div>`;
+}
+
 function renderToday(){
   const now=new Date();now.setHours(0,0,0,0);const d=ds(now),ts=tasks(now);
   const dn=['日','一','二','三','四','五','六'];
@@ -302,7 +297,7 @@ function renderToday(){
   document.getElementById('tcBar').style.width=pct+'%';
   const c=document.getElementById('tcTasks');
   if(!ts.length){c.innerHTML='<div class="tc-empty">暑假还没开始呢，先看看日历规划吧 😊</div>';return;}
-  c.innerHTML=ts.map((t,i)=>{const ck=ic(d,i);return `<div class="ti ${ck?'done':''}"><div class="ti-cb ${ck?'done':''}" onclick="tog('${d}',${i})"></div><div class="ti-dot" style="background:${SM[t.s]?.c||'#999'}"></div><div class="ti-info"><div class="ti-text">${t.t}</div><div class="ti-meta">${t.k?'<span class="ti-tag tag-k">重点</span>':''}${t.dy?'<span class="ti-tag tag-d">日常</span>':''}${'<span class="ti-tag tag-s">'+SM[t.s].l+'</span>'}</div></div></div>`;}).join('');
+  c.innerHTML=scheduleHtml(now)+ts.map((t,i)=>{const ck=ic(d,i);return `<div class="ti ${ck?'done':''}"><div class="ti-cb ${ck?'done':''}" onclick="tog('${d}',${i})"></div><div class="ti-dot" style="background:${SM[t.s]?.c||'#999'}"></div><div class="ti-info"><div class="ti-text">${t.t}</div><div class="ti-meta">${t.k?'<span class="ti-tag tag-k">重点</span>':''}${t.dy?'<span class="ti-tag tag-d">日常</span>':''}${'<span class="ti-tag tag-s">'+SM[t.s].l+'</span>'}</div></div></div>`;}).join('');
 }
 function renderStats(){
   const now=new Date();now.setHours(0,0,0,0);const d=ds(now),ts=tasks(now);
@@ -348,6 +343,7 @@ function renderDetail(dstr){
   let h=`<div class="detail-panel"><div class="dp-head"><h4>${m}月${da}日 周${dn[dt.getDay()]} · <span style="font-size:11px;color:var(--dim);">W${w}</span></h4><button class="dp-close" onclick="sel(null)">✕</button></div><div class="dp-body">`;
   if(tr)h+=`<div class="dp-travel">${tr.f} ${tr.n}旅行 — 轻量模式</div>`;
   if(!ts.length){h+='<div style="text-align:center;padding:16px;font-size:12px;color:var(--dim);">该日无安排</div>';}else{
+    h+=scheduleHtml(dt);
     h+=`<div class="dp-summary">完成 <b style="color:var(--green)">${done}</b>/${ts.length}（${pct}%）</div>`;
     h+=ts.map((t,i)=>{const ck=ic(dstr,i);return `<div class="ti ${ck?'done':''}"><div class="ti-cb ${ck?'done':''}" onclick="tog('${dstr}',${i})"></div><div class="ti-dot" style="background:${SM[t.s]?.c||'#999'}"></div><div class="ti-info"><div class="ti-text">${t.t}</div><div class="ti-meta">${t.k?'<span class="ti-tag tag-k">重点</span>':''}${t.dy?'<span class="ti-tag tag-d">日常</span>':''}${'<span class="ti-tag tag-s">'+SM[t.s].l+'</span>'}</div></div></div>`;}).join('');
   }
