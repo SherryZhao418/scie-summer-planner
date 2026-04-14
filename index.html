@@ -373,6 +373,7 @@
   .dot-eng { background: #0984e3; }
   .dot-sci { background: #00b894; }
   .dot-piano { background: #a29bfe; }
+  .dot-vlog { background: #fd79a8; }
   .dot-act { background: #fdcb6e; }
 
   /* Task items */
@@ -835,6 +836,8 @@ const WEEKS = [
       { subj: "eng", text: "选3首喜欢的英文歌开始精听" },
       { subj: "eng", text: "选第一本英文书开始读（推荐 The Alchemist）" },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min（本周曲目自选）" },
+      { subj: "vlog", text: "📹 Vlog #1「暑假第一天」开箱新装备+立下暑期目标", fun: true },
+      { subj: "vlog", text: "🎬 账号设置：注册小红书/B站/YouTube，确定账号名和定位" },
     ]
   },
   {
@@ -849,6 +852,7 @@ const WEEKS = [
       { subj: "eng", text: "英文书阅读进度50%" },
       { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "vlog", text: "📹 Vlog #2「我的学习角」360°展示书桌/学习装备/每日Routine", fun: true },
       { subj: "math", text: "周日做 Number 模块小测" },
     ]
   },
@@ -862,6 +866,7 @@ const WEEKS = [
       { subj: "eng", text: "英语歌精听2首新歌（飞机上听）" },
       { subj: "eng", text: "第一本英文书读完 + 写3句读后感" },
       { subj: "act", text: "🇯🇵 北海道旅行见闻：拍照+写英文日记 ✈️", fun: true },
+      { subj: "vlog", text: "📹 Vlog #3「北海道篇🇯🇵」360°拍薰衣草田/小樽运河/海鲜市场", fun: true },
       { subj: "act", text: "头脑风暴暑期活动项目方向" },
     ]
   },
@@ -875,6 +880,7 @@ const WEEKS = [
       { subj: "eng", text: "TOEFL词汇累计600+" },
       { subj: "eng", text: "启动第二本书 Tuesdays with Morrie" },
       { subj: "piano", text: "🎹 钢琴练习 2次 × 30min（回来后恢复）" },
+      { subj: "vlog", text: "📹 Vlog #4「北海道回忆」旅行Highlights剪辑+英文旁白尝试", fun: true },
     ]
   },
   {
@@ -887,6 +893,7 @@ const WEEKS = [
       { subj: "eng", text: "TOEFL词汇累计800+" },
       { subj: "eng", text: "第二首完整学会的英文歌 🎵", fun: true },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "vlog", text: "📹 Vlog #5「挑战英语歌」录一段翻唱+学习过程花絮", fun: true },
       { subj: "act", text: "确定暑期个人项目方向" },
     ]
   },
@@ -900,6 +907,7 @@ const WEEKS = [
       { subj: "eng", text: "第二本英文书完成" },
       { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "vlog", text: "📹 Vlog #6「过山车物理学」去游乐园！360°拍过山车+讲解物理原理", fun: true },
       { subj: "act", text: "活动项目：注册平台/发布第一篇内容 🚀", key: true },
     ]
   },
@@ -911,6 +919,7 @@ const WEEKS = [
       { subj: "math", text: "对比 Week 1 诊断卷，记录进步 📈" },
       { subj: "eng", text: "TOEFL词汇累计1200+" },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "vlog", text: "📹 Vlog #7「7周进步报告」展示数学成绩对比+Phase 1心得", fun: true },
       { subj: "act", text: "活动项目第二次更新" },
       { subj: "act", text: "🎢 奖励自己！去坐过山车！", fun: true },
     ]
@@ -925,6 +934,7 @@ const WEEKS = [
       { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
       { subj: "sci", text: "物理预习：Forces & Motion（力与运动）" },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "vlog", text: "📹 Vlog #8「我的一天」完整记录一天学习生活（Time-lapse + 360°）", fun: true },
       { subj: "act", text: "活动项目持续更新" },
     ]
   },
@@ -938,6 +948,7 @@ const WEEKS = [
       { subj: "sci", text: "物理预习：Energy（能量转化）" },
       { subj: "sci", text: "化学术语背诵（每周1小时）" },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "vlog", text: "📹 Vlog #9「打包出发🇺🇸」360°拍行李打包+出发前心情", fun: true },
       { subj: "act", text: "🇺🇸 准备美国旅行：英文日记模板、必备APP", key: true },
     ]
   },
@@ -950,6 +961,7 @@ const WEEKS = [
       { subj: "act", text: "🇺🇸 圆石滩出发！开启一个月美国之旅 ✈️", fun: true },
       { subj: "eng", text: "到达后：全英文环境沉浸！主动和当地人交流", fun: true },
       { subj: "eng", text: "开始写英文旅行日记（每天3-5句就行）" },
+      { subj: "vlog", text: "📹 Vlog #10「落地加州🇺🇸」360°拍机场/第一顿美国饭/圆石滩海岸线", fun: true },
     ]
   },
   {
@@ -960,7 +972,7 @@ const WEEKS = [
       { subj: "eng", text: "英文旅行日记持续写（记录有趣的表达）" },
       { subj: "eng", text: "逛一家当地书店，买一本感兴趣的英文书 📚", fun: true },
       { subj: "math", text: "轻量数学：每天3道混合题保持手感（用APP）" },
-      { subj: "act", text: "拍摄旅行Vlog素材（可以做成活动项目内容）" },
+      { subj: "vlog", text: "📹 Vlog #11「美式生活体验」360°拍超市/餐厅/街头文化对比", fun: true },
     ]
   },
   {
@@ -971,7 +983,7 @@ const WEEKS = [
       { subj: "eng", text: "英文旅行日记持续" },
       { subj: "eng", text: "🎵 找一首在美国听到的歌，精听学会它", fun: true },
       { subj: "math", text: "轻量数学：每天3道题（不用多，保手感就行）" },
-      { subj: "act", text: "🎆 7.4独立日！体验美国文化，写观察笔记", fun: true },
+      { subj: "vlog", text: "📹 Vlog #12「🎆美国独立日」360°拍烟火/BBQ派对/街头庆典", fun: true },
     ]
   },
   {
@@ -981,7 +993,7 @@ const WEEKS = [
       { subj: "eng", text: "TOEFL词汇累计2000+（旅途积累也算！）" },
       { subj: "eng", text: "英文旅行日记——写一篇最难忘的经历（200字+）", key: true },
       { subj: "math", text: "轻量数学保持" },
-      { subj: "act", text: "整理旅行素材：照片/视频/日记/感悟" },
+      { subj: "vlog", text: "📹 Vlog #13「一个月美国生活」360°回顾最爱的地方+英文旁白总结", fun: true },
       { subj: "act", text: "思考：这次旅行可以怎么融入申请文书？💡" },
     ]
   },
@@ -995,6 +1007,7 @@ const WEEKS = [
       { subj: "math", text: "回国后恢复数学：做一套真题找回状态", key: true },
       { subj: "eng", text: "把旅行中学到的地道表达整理成词汇表" },
       { subj: "piano", text: "🎹 钢琴恢复练习 2次 × 30min" },
+      { subj: "vlog", text: "📹 Vlog #14「回国感受」从美国回来后的文化反差+暑假下半场目标", fun: true },
     ]
   },
   {
@@ -1008,6 +1021,7 @@ const WEEKS = [
       { subj: "act", text: "看学长学姐分享（公众号/小红书/B站）" },
       { subj: "act", text: "列出想尝试的社团清单" },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min（全面恢复）" },
+      { subj: "vlog", text: "📹 Vlog #15「冲刺模式」360°拍全力备战的一天+TPO模考实录", fun: true },
     ]
   },
   {
@@ -1020,6 +1034,7 @@ const WEEKS = [
       { subj: "eng", text: "TOEFL词汇累计2500+" },
       { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
+      { subj: "vlog", text: "📹 Vlog #16「开箱宿舍装备」360°拍打包行李+开学必备好物", fun: true },
     ]
   },
   {
@@ -1030,6 +1045,7 @@ const WEEKS = [
       { subj: "act", text: "写一篇暑期总结（给自己看）" },
       { subj: "act", text: "准备好开学物品 ✅" },
       { subj: "piano", text: "🎹 弹一首完整曲目录视频——记录暑期成果", fun: true },
+      { subj: "vlog", text: "📹 Vlog #17「暑假完结篇」17周回顾混剪+写给深国交的自己", fun: true },
       { subj: "act", text: "🎢 放松一天！去游乐园/什么都不做！", fun: true },
       { subj: "act", text: "带着好心情开学！🎉", fun: true },
     ]
@@ -1092,6 +1108,7 @@ const SUBJ_META = {
   eng: { label: "英语", dot: "dot-eng" },
   sci: { label: "理化", dot: "dot-sci" },
   piano: { label: "钢琴", dot: "dot-piano" },
+  vlog: { label: "Vlog", dot: "dot-vlog" },
   act: { label: "活动", dot: "dot-act" },
 };
 
