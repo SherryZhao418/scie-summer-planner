@@ -158,6 +158,7 @@ body{font-family:'Nunito',-apple-system,BlinkMacSystemFont,sans-serif;background
     <h2>📌 今日任务</h2>
     <div><span class="tc-date" id="tcDate"></span> <span class="tc-pct" id="tcPct"></span></div>
   </div>
+  <div id="tcTheme"></div>
   <div class="tc-progress"><div class="tc-progress-fill" id="tcBar" style="width:0"></div></div>
   <div class="tc-tasks" id="tcTasks"></div>
 </div>
@@ -470,6 +471,114 @@ function getMathTask(d){
   return m.t+(m.n?' <span style="font-size:10px;color:var(--dim);">· '+m.n+'</span>':'');
 }
 
+// ===== DAILY THEME + QUOTE =====
+// Each day has: theme (today's focus), goal (why), quote (motivation)
+// Designed to give direction and emotional fuel every morning
+const DAY_THEMES=[
+// W1 启动周
+{th:'🚀 启航日',gl:'今天是暑假第一天。搭建学习环境，做好诊断，知道起点在哪里。',q:'"A journey of a thousand miles begins with a single step." — Lao Tzu'},
+{th:'🔢 数学根基',gl:'HCF/LCM是整个IGCSE数学的地基。今天打牢，后面才稳。',q:'"Pure mathematics is, in its way, the poetry of logical ideas." — Einstein'},
+{th:'📝 刻意练习',gl:'今天的重点是做题+记错。错题本从今天开始，它会是你最好的老师。',q:'"I have not failed. I\'ve just found 10,000 ways that won\'t work." — Edison'},
+{th:'🎵 打开耳朵',gl:'数学之外的世界。选好你的第一批英文歌，让精听成为每天的期待。',q:'"Music gives a soul to the universe, wings to the mind." — Plato'},
+{th:'📖 开始阅读',gl:'翻开The Alchemist第一页。Santiago的追梦旅程，也是你的故事的开始。',q:'"When you want something, all the universe conspires in helping you." — Coelho'},
+{th:'🎹 周末充电',gl:'钢琴+Vlog+运动。劳逸结合才能走得远。',q:'"Rest when you\'re weary. Refresh and renew yourself." — Ralph Waldo Emerson'},
+{th:'🌟 周末回顾',gl:'回顾第一周。你已经迈出了最难的一步——开始。',q:'"The secret of getting ahead is getting started." — Mark Twain'},
+// W2 Number进阶
+{th:'📐 Standard Form',gl:'科学记数法是物理和化学的基础语言。今天掌握它。',q:'"The only way to do great work is to love what you do." — Steve Jobs'},
+{th:'🔢 计算力提升',gl:'Standard Form不只是会算，要又快又准。速度就是信心。',q:'"It\'s not that I\'m so smart, it\'s that I stay with problems longer." — Einstein'},
+{th:'⚖️ 比例思维',gl:'比例无处不在——化学方程式、地理比例尺、经济增长率都用它。',q:'"In the middle of difficulty lies opportunity." — Einstein'},
+{th:'💰 复利的力量',gl:'学复利计算，也理解复利思维——每天进步1%，一个暑假就是38倍的你。',q:'"Compound interest is the eighth wonder of the world." — Einstein'},
+{th:'📊 检验成果',gl:'第一次小测！不怕错，怕的是不知道哪里错。诊断比分数重要。',q:'"What gets measured gets managed." — Peter Drucker'},
+{th:'🎹 平衡日',gl:'学了一周数学，今天让大脑换个频道。钢琴和运动一样重要。',q:'"Almost everything will work again if you unplug it for a few minutes." — Anne Lamott'},
+{th:'🎵 音乐与成长',gl:'试着完整唱一首英文歌。能唱出来说明你真的听懂了。',q:'"One good thing about music: when it hits you, you feel no pain." — Bob Marley'},
+// W3 Algebra入门+北海道
+{th:'🔤 代数起飞',gl:'从数字到字母——代数是数学思维的质变。今天开始新篇章。',q:'"The beautiful thing about learning is nobody can take it away from you." — B.B. King'},
+{th:'✂️ 化繁为简',gl:'化简的本质是看到复杂中的规律。数学如此，人生亦如此。',q:'"Simplicity is the ultimate sophistication." — Leonardo da Vinci'},
+{th:'🧩 因式分解',gl:'把复杂的东西拆成简单的部分——这是解决一切问题的思维方式。',q:'"If I have seen further, it is by standing on the shoulders of giants." — Newton'},
+{th:'✈️ 北海道出发！',gl:'旅行也是学习。用英文记录你看到的一切，这就是最好的语言课。',q:'"The world is a book, and those who do not travel read only one page." — Augustine'},
+{th:'🇯🇵 探索日',gl:'在异国保持好奇心。今天的每一个新体验，未来都可能出现在你的文书里。',q:'"Not all who wander are lost." — J.R.R. Tolkien'},
+{th:'📸 记录日',gl:'用Vlog记录旅行。你正在创造属于自己的故事。',q:'"Life is either a daring adventure or nothing at all." — Helen Keller'},
+{th:'💡 思考日',gl:'旅行结束前想想：这次经历教会了你什么？什么让你最触动？',q:'"Travel is fatal to prejudice, bigotry, and narrow-mindedness." — Mark Twain'},
+// W4 Algebra方程
+{th:'🔄 回归节奏',gl:'旅行回来，用整理游记过渡，明天恢复数学全力冲。',q:'"Success is not final, failure is not fatal: it is the courage to continue." — Churchill'},
+{th:'⚡ 方程入门',gl:'一元一次方程——数学中最基础的"解谜"。今天开始解题高手之路。',q:'"Do not worry about your difficulties in mathematics. I can assure you mine are still greater." — Einstein'},
+{th:'🔗 联立方程',gl:'两个未知数、两个方程——学会同时处理多个约束条件。这是工程思维。',q:'"Logic will get you from A to B. Imagination will take you everywhere." — Einstein'},
+{th:'📖 阅读疗愈',gl:'数学密集的一周，用Tuesdays with Morrie治愈自己。想想什么对你最重要。',q:'"The most important thing in life is to learn how to give out love." — Morrie Schwartz'},
+{th:'🎹 音乐时光',gl:'钢琴不只是任务，是你释放压力的方式。享受它。',q:'"Where words fail, music speaks." — Hans Christian Andersen'},
+{th:'🎤 表达练习',gl:'朗读英文书录音。听自己的声音，找到改进点。',q:'"The art of communication is the language of leadership." — James Humes'},
+{th:'📹 创作日',gl:'Vlog不是作业，是你的作品集。未来大学面试时，这就是你的亮点。',q:'"Creativity is intelligence having fun." — Einstein'},
+// W5 Algebra拓展
+{th:'📈 不等式',gl:'不等式教你处理"范围"而非精确值——现实世界大多数问题都是这样。',q:'"The measure of intelligence is the ability to change." — Einstein'},
+{th:'🔢 数列之美',gl:'找规律是数学最迷人的部分。nth term公式让你预测未来。',q:'"Mathematics is the queen of the sciences." — Carl Friedrich Gauss'},
+{th:'🧮 代数分式',gl:'最难的Algebra部分。今天啃硬骨头，后面就轻松了。',q:'"A smooth sea never made a skilled sailor." — Franklin D. Roosevelt'},
+{th:'💪 综合训练',gl:'用Algebra练习题检验自己。错题=进步空间。',q:'"Champions keep playing until they get it right." — Billie Jean King'},
+{th:'📝 综合测试',gl:'W3-5全部内容大测试。这是Phase 1的中期考，认真对待。',q:'"The expert in anything was once a beginner." — Helen Hayes'},
+{th:'🎵 挑战歌曲',gl:'试着用英文完整唱一首挑战歌。唱得出来就是真的会了。',q:'"I can accept failure. Everyone fails at something. But I can\'t accept not trying." — Michael Jordan'},
+{th:'🌟 项目启动',gl:'确定暑期个人项目方向。做你真正感兴趣的事，招生官看得出真假。',q:'"Follow your passion; it will lead you to your purpose." — Oprah Winfrey'},
+// W6 Geometry
+{th:'📐 几何世界',gl:'从代数到几何——换一种思维方式。画图能力从今天开始培养。',q:'"Geometry is the archetype of the beauty of the world." — Johannes Kepler'},
+{th:'⭕ Circle Theorems',gl:'圆的定理是IGCSE最经典的考点。掌握它，考试至少多拿10分。',q:'"In mathematics the art of proposing a question must be held of higher value than solving it." — Georg Cantor'},
+{th:'📏 空间想象',gl:'面积与体积。学会在2D纸上思考3D问题。',q:'"Imagination is more important than knowledge." — Einstein'},
+{th:'🎬 电影日',gl:'学了一周几何，看一部和数学/音乐相关的电影放松。',q:'"Art is the lie that enables us to realize the truth." — Picasso'},
+{th:'🚀 项目发布',gl:'今天把你的活动项目正式上线！迈出第一步比完美更重要。',q:'"Done is better than perfect." — Sheryl Sandberg'},
+{th:'🎹 音乐+物理',gl:'今天的Vlog主题是过山车物理！把你的热爱和学习结合起来。',q:'"The most beautiful thing we can experience is the mysterious." — Einstein'},
+{th:'🎢 周末放松',gl:'深呼吸。Phase 1快结束了。给自己一个大大的奖励。',q:'"Take rest; a field that has rested gives a bountiful crop." — Ovid'},
+// W7 Phase 1收尾
+{th:'📈 坐标几何',gl:'y=mx+c——用数学画出一条直线。简单却强大。',q:'"The shortest distance between two points is a straight line." — Archimedes'},
+{th:'📋 模拟考试',gl:'Phase 1终极检验！像真正考试一样对待。你准备好了。',q:'"Pressure is a privilege." — Billie Jean King'},
+{th:'📊 量化进步',gl:'对比W1的诊断卷和今天的成绩。每一分进步都是你的勋章。',q:'"It does not matter how slowly you go as long as you do not stop." — Confucius'},
+{th:'🔬 科学探索',gl:'看物理视频激发好奇心。好奇心是学习最强的驱动力。',q:'"The important thing is not to stop questioning. Curiosity has its own reason for existing." — Einstein'},
+{th:'💼 项目更新',gl:'持续做，不要停。活动的价值不在于多大，而在于持续和深度。',q:'"Small daily improvements are the key to staggering long-term results." — Unknown'},
+{th:'🎹 Phase 1最后的钢琴',gl:'弹一首你最喜欢的曲子。音乐是你给自己的奖励。',q:'"After silence, that which comes nearest to expressing the inexpressible is music." — Aldous Huxley'},
+{th:'🎢 庆祝日！',gl:'Phase 1完成！7周的蜕变值得一个过山车。Go celebrate! 🎉',q:'"You are never too old to set another goal or to dream a new dream." — C.S. Lewis'},
+// W8-16 继续...用函数动态生成
+];
+
+// For weeks 8-16, generate themes dynamically
+const THEMES_EXT={
+  8:['🔺 三角函数','📐 仰角俯角','📏 正弦余弦定理','🎯 函数入门','📈 二次函数','🎹 音乐时光','🎬 电影+反思'],
+  9:['📊 统计学','🎲 概率','🔬 物理预习','🧪 化学术语','✈️ 出发准备','🎹 最后的钢琴','📦 打包！'],
+  10:['📋 终极模考','📝 旅行准备','✈️ 出发🇺🇸','🇺🇸 适应','🗣️ 英文沉浸','📹 记录加州','🧘 调整'],
+  11:['🏊 探索','🏃 海滩','🗣️ 对话','📚 书店','🏄 冲浪','📹 Vlog','🧘 休息'],
+  12:['🎵 美国音乐','🚶 徒步','🗣️ 辩论','🎆 独立日','🏋️ 健身','📹 Vlog','🧘 放松'],
+  13:['🗣️ 口语挑战','✍️ 写作','🏊 游泳','📝 难忘经历','🎤 分享','📹 总结','💡 反思'],
+  14:['📋 回国整理','📚 选课研究','🔢 恢复数学','📝 整理表达','🎯 确定方向','🎹 恢复钢琴','🏋️ 恢复运动'],
+  15:['🔢 纯英文数学','📋 最终测评','📝 TPO模考','🔬 物理+化学','💰 经济学','🎹 钢琴','📹 冲刺Vlog'],
+  16:['🧳 准备行李','📚 宿舍规则','🔢 最后测评','📋 整理笔记','✍️ 暑期总结','🎹 录曲目','🎢 开学快乐！'],
+};
+const QUOTES_EXT=[
+  '"Believe you can and you\'re halfway there." — Theodore Roosevelt',
+  '"Education is the most powerful weapon which you can use to change the world." — Nelson Mandela',
+  '"The future belongs to those who believe in the beauty of their dreams." — Eleanor Roosevelt',
+  '"It always seems impossible until it\'s done." — Nelson Mandela',
+  '"Success is stumbling from failure to failure with no loss of enthusiasm." — Winston Churchill',
+  '"The only limit to our realization of tomorrow will be our doubts of today." — Franklin Roosevelt',
+  '"You miss 100% of the shots you don\'t take." — Wayne Gretzky',
+];
+
+function getDayTheme(d){
+  const diff=Math.floor((d-S)/864e5);
+  if(diff<0)return {th:'🚀 倒计时',gl:`距离暑假开始还有${-diff}天。用这段时间做好准备！`,q:'"The best time to plant a tree was 20 years ago. The second best time is now." — Chinese Proverb'};
+  if(diff<DAY_THEMES.length) return DAY_THEMES[diff];
+  // For later weeks, use dynamic
+  const w=wn(d),dw=dow(d);
+  const wThemes=THEMES_EXT[w];
+  const th=wThemes?wThemes[(dw-1)%wThemes.length]:'📌 专注';
+  const goals={8:'Phase 2能力跃升——三角函数和函数是A*的分水岭',9:'统计概率+出发准备——用数据思维武装自己',10:'终极模考+踏上美国之旅',11:'在美国用英文生活——这是最好的语言课堂',12:'文化沉浸+独立日体验——感受真实的美国',13:'一个月美国生活的收官——把经历变成故事',14:'回国恢复+为深国交做最后准备',15:'全力冲刺——用最好的状态迎接开学',16:'收官——你已经准备好了！'};
+  const gl=goals[w]||'保持节奏，每天进步一点点';
+  const q=QUOTES_EXT[diff%QUOTES_EXT.length];
+  return {th,gl,q};
+}
+
+function themeHtml(d){
+  const t=getDayTheme(d);
+  return `<div style="padding:10px 18px;background:linear-gradient(135deg,rgba(74,128,196,0.04),rgba(139,92,246,0.04));border-bottom:1px solid var(--border);">
+    <div style="font-size:14px;font-weight:800;margin-bottom:3px;">${t.th}</div>
+    <div style="font-size:11px;color:var(--text);line-height:1.5;margin-bottom:6px;">${t.gl}</div>
+    <div style="font-size:11px;color:var(--dim);font-style:italic;line-height:1.4;">${t.q}</div>
+  </div>`;
+}
+
 // ===== SONG CURRICULUM =====
 // 36 songs × 3 days each = 108 workdays (covers 16 weeks)
 // Sequenced by phonetic training goals
@@ -670,6 +779,7 @@ function renderToday(){
   const pct=ts.length?Math.round(done/ts.length*100):0;
   document.getElementById('tcPct').textContent=ts.length?`${done}/${ts.length}`:'';
   document.getElementById('tcBar').style.width=pct+'%';
+  document.getElementById('tcTheme').innerHTML=themeHtml(showDate);
   const c=document.getElementById('tcTasks');
   if(!ts.length){c.innerHTML='<div class="tc-empty">暑假还没开始呢 😊</div>';return;}
   c.innerHTML=taskHtml(ts,d);
@@ -719,6 +829,7 @@ function renderDetail(dstr){
   const pct=ts.length?Math.round(done/ts.length*100):0;
   let h=`<div class="detail-panel"><div class="dp-head"><h4>${m}月${da}日 周${dn[dt.getDay()]} · <span style="font-size:11px;color:var(--dim);">W${w}</span></h4><button class="dp-close" onclick="sel(null)">✕</button></div><div class="dp-body">`;
   if(tr)h+=`<div class="dp-travel">${tr.f} ${tr.n}旅行 — 轻量模式</div>`;
+  h+=themeHtml(dt);
   if(!ts.length){h+='<div style="text-align:center;padding:16px;font-size:12px;color:var(--dim);">该日无安排</div>';}else{
     h+=`<div class="dp-summary">完成 <b style="color:var(--green)">${done}</b>/${ts.length}（${pct}%）</div>`;
     h+=taskHtml(ts,dstr);
