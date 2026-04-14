@@ -324,6 +324,7 @@
   .dot-math { background: #e17055; }
   .dot-eng { background: #0984e3; }
   .dot-sci { background: #00b894; }
+  .dot-piano { background: #a29bfe; }
   .dot-act { background: #fdcb6e; }
 
   /* Task items */
@@ -624,6 +625,7 @@
   <div class="nav-tab active" data-tab="weekly" onclick="switchTab('weekly')">📋 每周任务</div>
   <div class="nav-tab" data-tab="daily" onclick="switchTab('daily')">⏰ 每日安排</div>
   <div class="nav-tab" data-tab="songs" onclick="switchTab('songs')">🎵 歌单</div>
+  <div class="nav-tab" data-tab="films" onclick="switchTab('films')">🎬 电影</div>
   <div class="nav-tab" data-tab="books" onclick="switchTab('books')">📚 书单</div>
 </div>
 
@@ -718,6 +720,16 @@
   <div id="booksList"></div>
 </div>
 
+<div class="daily-section" id="filmsContent">
+  <div class="schedule-card">
+    <h3>🎬 英文原版电影推荐</h3>
+    <div style="font-size:11px;color:var(--text-dim);margin-bottom:12px;">
+      每两周看1部 · 全程英文字幕 · 记5个地道表达 · 周末放松必备
+    </div>
+  </div>
+  <div id="filmsList"></div>
+</div>
+
 <div class="reset-section">
   <button class="reset-btn" onclick="resetAll()">🔄 重置所有打卡数据</button>
 </div>
@@ -739,6 +751,7 @@ const WEEKS = [
       { subj: "eng", text: "下载 Magoosh Vocabulary APP，开始每天30词" },
       { subj: "eng", text: "选3首喜欢的英文歌开始精听" },
       { subj: "eng", text: "选第一本英文书开始读（推荐 The Alchemist）" },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min（本周曲目自选）" },
     ]
   },
   {
@@ -751,6 +764,8 @@ const WEEKS = [
       { subj: "eng", text: "TOEFL词汇累计200+" },
       { subj: "eng", text: "学会完整唱1首英文歌 🎵", fun: true },
       { subj: "eng", text: "英文书阅读进度50%" },
+      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "math", text: "周日做 Number 模块小测" },
     ]
   },
@@ -765,6 +780,7 @@ const WEEKS = [
       { subj: "eng", text: "TOEFL词汇累计400+" },
       { subj: "eng", text: "英语歌精听3首新歌" },
       { subj: "eng", text: "第一本英文书读完 + 写3句读后感" },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "act", text: "头脑风暴暑期活动项目方向" },
     ]
   },
@@ -777,6 +793,8 @@ const WEEKS = [
       { subj: "eng", text: "TOEFL词汇累计600+" },
       { subj: "eng", text: "启动第二本书 Tuesdays with Morrie" },
       { subj: "eng", text: "每天看1个 TED-Ed 视频（5-10min）" },
+      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
     ]
   },
   {
@@ -788,6 +806,7 @@ const WEEKS = [
       { subj: "math", text: "30道 Algebra 综合练习" },
       { subj: "eng", text: "TOEFL词汇累计800+" },
       { subj: "eng", text: "第二首完整学会的英文歌 🎵", fun: true },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "act", text: "确定暑期个人项目方向" },
     ]
   },
@@ -799,6 +818,8 @@ const WEEKS = [
       { subj: "math", text: "面积与体积计算" },
       { subj: "eng", text: "TOEFL词汇累计1000+" },
       { subj: "eng", text: "第二本英文书完成" },
+      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "act", text: "活动项目：注册平台/发布第一篇内容 🚀", key: true },
     ]
   },
@@ -809,6 +830,7 @@ const WEEKS = [
       { subj: "math", text: "做一套 IGCSE 数学模拟卷（计时！）", key: true },
       { subj: "math", text: "对比 Week 1 诊断卷，记录进步 📈" },
       { subj: "eng", text: "TOEFL词汇累计1200+" },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "act", text: "活动项目第二次更新" },
       { subj: "act", text: "🎢 奖励自己！去坐过山车！", fun: true },
     ]
@@ -820,7 +842,9 @@ const WEEKS = [
       { subj: "math", text: "函数 f(x) notation + 线性/二次函数" },
       { subj: "eng", text: "做一套 TPO 阅读（摸底测试）", key: true },
       { subj: "eng", text: "启动第三本书 Educated" },
+      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
       { subj: "sci", text: "物理预习：Forces & Motion（力与运动）" },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "act", text: "活动项目持续更新" },
     ]
   },
@@ -833,6 +857,7 @@ const WEEKS = [
       { subj: "eng", text: "TOEFL词汇累计1500+" },
       { subj: "sci", text: "物理预习：Energy（能量转化）" },
       { subj: "sci", text: "化学术语背诵（每周1小时）" },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
     ]
   },
   {
@@ -843,6 +868,8 @@ const WEEKS = [
       { subj: "eng", text: "TOEFL口语录音练习 Task 1" },
       { subj: "eng", text: "第三本英文书完成" },
       { subj: "eng", text: "第三首完整学会的英文歌 🎵", fun: true },
+      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
     ]
   },
   {
@@ -852,6 +879,7 @@ const WEEKS = [
       { subj: "eng", text: "TPO 完整模考1套（4科全做）", key: true },
       { subj: "eng", text: "分析模考弱项，制定针对性计划" },
       { subj: "eng", text: "启动第四本书" },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "act", text: "活动项目：内容已有一定积累" },
     ]
   },
@@ -861,6 +889,8 @@ const WEEKS = [
       { subj: "eng", text: "TOEFL 弱项强化（阅读/听力/口语/写作）", key: true },
       { subj: "math", text: "数学保持每天5道题" },
       { subj: "sci", text: "物理预习：Waves（波 = 声波 = 音乐🎵）" },
+      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "act", text: "如有旅行计划：准备英文日记模板 ✈️", fun: true },
     ]
   },
@@ -872,6 +902,7 @@ const WEEKS = [
       { subj: "math", text: "做1套 IGCSE 真题卷" },
       { subj: "eng", text: "TOEFL词汇累计2000+" },
       { subj: "eng", text: "第四本英文书完成" },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
     ]
   },
   {
@@ -881,7 +912,9 @@ const WEEKS = [
       { subj: "act", text: "初步确定 IGCSE 选课方向" },
       { subj: "eng", text: "练习学术写作 Essay Structure" },
       { subj: "eng", text: "找人用英文讨论一个话题（口语练习）" },
+      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
       { subj: "math", text: "数学保持做题" },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
     ]
   },
   {
@@ -892,6 +925,7 @@ const WEEKS = [
       { subj: "act", text: "列出想尝试的社团清单" },
       { subj: "eng", text: "启动第五本书 The Great Gatsby" },
       { subj: "math", text: "数学全模块最终测评", key: true },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
     ]
   },
   {
@@ -902,6 +936,8 @@ const WEEKS = [
       { subj: "eng", text: "写一篇英文自我介绍" },
       { subj: "math", text: "最后一次 IGCSE 数学全面测评" },
       { subj: "eng", text: "TOEFL词汇累计2500+" },
+      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
+      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
     ]
   },
   {
@@ -911,6 +947,7 @@ const WEEKS = [
       { subj: "act", text: "回顾暑期活动项目成果" },
       { subj: "act", text: "写一篇暑期总结（给自己看）" },
       { subj: "act", text: "准备好开学物品 ✅" },
+      { subj: "piano", text: "🎹 弹一首完整曲目录视频——记录暑期成果", fun: true },
       { subj: "act", text: "🎢 放松一天！去游乐园/什么都不做！", fun: true },
       { subj: "act", text: "带着好心情开学！🎉", fun: true },
     ]
@@ -945,12 +982,34 @@ const QUOTES = [
   "别和别人比——你的时间线是独一无二的 ⏰",
   "周末记得放松！好的学习状态比多学1小时更重要 ☀️",
   "深国交等你来——用这个暑假证明你准备好了 🏫",
+  "钢琴和数学一样——每天练一点，量变引起质变 🎹",
+];
+
+const FILMS = [
+  { title: "The Social Network", year: 2010, genre: "剧情/传记", lang: "⭐⭐", why: "Facebook创业故事——了解美国校园文化和创业精神", tip: "语速快、口语地道，练听力极佳" },
+  { title: "Dead Poets Society", year: 1989, genre: "剧情/教育", lang: "⭐⭐", why: "关于教育、自由思考和勇气——美本文书灵感来源", tip: "经典台词多，值得摘抄背诵" },
+  { title: "The Pursuit of Happyness", year: 2006, genre: "剧情/传记", lang: "⭐⭐", why: "逆境中坚持追梦——成长型思维的最佳诠释", tip: "Will Smith发音清晰，适合跟读" },
+  { title: "Hidden Figures", year: 2016, genre: "剧情/传记", lang: "⭐⭐⭐", why: "NASA女性数学家的故事——STEM+平权主题，美本超爱", tip: "有数学/物理术语，刚好练学科英语" },
+  { title: "The Imitation Game", year: 2014, genre: "剧情/传记", lang: "⭐⭐⭐", why: "图灵破解密码——数学+计算机+历史的完美交叉", tip: "英式英语，适应深国交的语言环境" },
+  { title: "Interstellar", year: 2014, genre: "科幻", lang: "⭐⭐⭐", why: "硬核物理学——看完对相对论和黑洞有直觉理解", tip: "科学术语丰富，配合物理预习效果翻倍" },
+  { title: "Good Will Hunting", year: 1997, genre: "剧情", lang: "⭐⭐⭐", why: "数学天才与心理成长——文书素材'发现自我'主题", tip: "波士顿口音有挑战，练听力好材料" },
+  { title: "The Shawshank Redemption", year: 1994, genre: "剧情", lang: "⭐⭐", why: "关于希望和坚持——影史经典，美国文化常识", tip: "旁白叙事优美，练阅读理解式听力" },
+  { title: "Coco", year: 2017, genre: "动画/音乐", lang: "⭐", why: "音乐+家庭+墨西哥文化——轻松又有深度", tip: "语言简单，适合放松时看，歌曲好听" },
+  { title: "Whiplash", year: 2014, genre: "剧情/音乐", lang: "⭐⭐⭐", why: "音乐追梦的极致——关于天赋、努力和代价", tip: "紧张刺激，和钢琴练习的心态相通" },
+  { title: "The Theory of Everything", year: 2014, genre: "剧情/传记", lang: "⭐⭐⭐", why: "霍金的故事——物理学+坚韧精神", tip: "英式英语，学术场景多" },
+  { title: "October Sky", year: 1999, genre: "剧情/传记", lang: "⭐⭐", why: "小镇少年的火箭梦——STEM追梦故事的经典", tip: "和过山车物理学一样——用热情驱动学习" },
+  { title: "Soul", year: 2020, genre: "动画/音乐", lang: "⭐", why: "关于人生意义和热情——爵士乐+哲学思考", tip: "Pixar出品，轻松但有深度" },
+  { title: "A Beautiful Mind", year: 2001, genre: "剧情/传记", lang: "⭐⭐⭐", why: "数学家纳什的传奇——博弈论+心理斗争", tip: "数学背景浓厚，看完对数学更有敬畏" },
+  { title: "Ferris Bueller's Day Off", year: 1986, genre: "喜剧", lang: "⭐⭐", why: "美国高中文化经典——了解美式青少年生活", tip: "轻松搞笑，美式俚语多，练口语" },
+  { title: "Inception", year: 2010, genre: "科幻/动作", lang: "⭐⭐⭐", why: "烧脑科幻——逻辑思维训练，比过山车还刺激", tip: "节奏快，适合挑战高强度听力" },
+  { title: "The Greatest Showman", year: 2017, genre: "歌舞/传记", lang: "⭐⭐", why: "音乐+梦想+冒险——歌曲超好听，练英语歌的素材", tip: "This Is Me等歌曲可加入精听歌单" },
 ];
 
 const SUBJ_META = {
   math: { label: "数学", dot: "dot-math" },
   eng: { label: "英语", dot: "dot-eng" },
   sci: { label: "理化", dot: "dot-sci" },
+  piano: { label: "钢琴", dot: "dot-piano" },
   act: { label: "活动", dot: "dot-act" },
 };
 
@@ -1033,6 +1092,7 @@ function render() {
   renderWeeks();
   renderSongs();
   renderBooks();
+  renderFilms();
   renderQuote();
 }
 
@@ -1194,6 +1254,25 @@ function renderBooks() {
   list.innerHTML = html;
 }
 
+function renderFilms() {
+  const list = document.getElementById('filmsList');
+  let html = '';
+  FILMS.forEach(f => {
+    html += `<div class="book-card" style="background:rgba(108,92,231,0.08);border-color:rgba(108,92,231,0.15);">
+      <div style="display:flex;justify-content:space-between;align-items:start;">
+        <div>
+          <div class="book-title" style="font-style:normal;font-weight:700;">${f.title}</div>
+          <div class="book-author">${f.year} · ${f.genre} · 语言难度 ${f.lang}</div>
+        </div>
+        <div style="font-size:16px;flex-shrink:0;margin-left:8px;">🎬</div>
+      </div>
+      <div style="font-size:11px;color:var(--accent-light);margin-top:4px;">💡 ${f.why}</div>
+      <div style="font-size:10px;color:var(--text-dim);margin-top:3px;">🎧 ${f.tip}</div>
+    </div>`;
+  });
+  list.innerHTML = html;
+}
+
 function renderQuote() {
   const idx = Math.floor(Math.random() * QUOTES.length);
   document.getElementById('quoteBar').textContent = QUOTES[idx];
@@ -1216,6 +1295,7 @@ function switchTab(tab) {
   document.getElementById('weeklyContent').style.display = tab === 'weekly' ? 'block' : 'none';
   document.getElementById('dailyContent').className = tab === 'daily' ? 'daily-section visible' : 'daily-section';
   document.getElementById('songsContent').className = tab === 'songs' ? 'daily-section visible' : 'daily-section';
+  document.getElementById('filmsContent').className = tab === 'films' ? 'daily-section visible' : 'daily-section';
   document.getElementById('booksContent').className = tab === 'books' ? 'daily-section visible' : 'daily-section';
   
   document.querySelector('.reset-section').style.display = tab === 'weekly' ? 'block' : 'none';
