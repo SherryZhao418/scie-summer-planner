@@ -230,7 +230,83 @@ function wn(d){const diff=(d-S)/864e5;if(diff<0)return 0;return Math.min(16,Math
 function dow(d){const w=d.getDay();return w===0?7:w;}
 function ds(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 
-const DR=[{s:'math',t:'🔢 数学学习+练习',k:1,tm:'09:00',dur:'90min'},{s:'eng',t:'📖 词汇书 1 Chapter',k:1,tm:'10:45',dur:'30min'},{s:'eng',t:'🇬🇧 英语阅读/精听',tm:'11:15',dur:'30min'},{s:'eng',t:'🎵 英语歌精听/跟唱',tm:'14:00',dur:'30min'},{s:'eng',t:'📖 英文书阅读',tm:'14:30',dur:'30min'},{s:'piano',t:'🎹 钢琴练习',tm:'20:00',dur:'30min'},{s:'eng',t:'📖 睡前轻松阅读',tm:'21:00',dur:'30min'}];
+const DR=[{s:'math',t:'🔢 数学学习+练习',k:1,tm:'09:00',dur:'90min'},{s:'eng',t:'📖 词汇书 1 Chapter',k:1,tm:'10:45',dur:'30min'},{s:'eng',t:'🇬🇧 英语阅读/精听',tm:'11:15',dur:'30min'},{s:'eng',t:'__SONG__',tm:'14:00',dur:'30min'},{s:'eng',t:'📖 英文书阅读',tm:'14:30',dur:'30min'},{s:'piano',t:'🎹 钢琴练习',tm:'20:00',dur:'30min'},{s:'eng',t:'📖 睡前轻松阅读',tm:'21:00',dur:'30min'}];
+
+// ===== SONG CURRICULUM =====
+// 36 songs × 3 days each = 108 workdays (covers 16 weeks)
+// Sequenced by phonetic training goals
+const SONG_LIST=[
+// --- Phase 1: 慢速+清晰元音（W1-3）建立精听信心 ---
+// W1: Whitney慢歌入门——咬字最清晰的天后
+{name:"I Will Always Love You",artist:"Whitney Houston",goal:"元音饱满度训练：注意love/always中的长元音"},
+{name:"Greatest Love of All",artist:"Whitney Houston",goal:"句子重音训练：找出每句的重读词"},
+{name:"One Moment in Time",artist:"Whitney Houston",goal:"气息与停顿：标注换气点，模仿她的气息控制"},
+// W2: 继续Whitney慢歌，加入情感表达
+{name:"I Have Nothing",artist:"Whitney Houston",goal:"情感语调变化：从低语到高潮的语调弧线"},
+{name:"Run to You",artist:"Whitney Houston",goal:"弱读训练入门：注意to/you在快速部分的弱化"},
+// W3: 过渡到Mariah慢歌
+{name:"Hero",artist:"Mariah Carey",goal:"对比Whitney的咬字风格，Mariah更柔和——注意共鸣位置不同"},
+{name:"Without You",artist:"Mariah Carey",goal:"长音保持训练：can't live后的拖音有多长？精确计时"},
+
+// --- Phase 2: 中速+连读弱读（W4-6）---
+// W4: Whitney中速
+{name:"Saving All My Love for You",artist:"Whitney Houston",goal:"连读训练：all my→/ɔːlmaɪ/，love for→/lʌvfə/"},
+{name:"Didn't We Almost Have It All",artist:"Whitney Houston",goal:"缩略形式：didn't/wasn't/couldn't的自然发音"},
+{name:"All the Man That I Need",artist:"Whitney Houston",goal:"that I→/ðæɾaɪ/ 美式弹舌音，听清并模仿"},
+// W5: 开始加速
+{name:"How Will I Know",artist:"Whitney Houston",goal:"快节奏首秀！注意will I→/wɪlaɪ/连读"},
+{name:"So Emotional",artist:"Whitney Houston",goal:"重复段落速记：chorus重复3遍，第3遍要能跟上90%"},
+// W6: Mariah中速
+{name:"Always Be My Baby",artist:"Mariah Carey",goal:"R&B节奏感：注意切分音位置，拍子比Whitney更灵活"},
+{name:"Vision of Love",artist:"Mariah Carey",goal:"转音(melisma)初体验：标注所有转音位置"},
+
+// --- Phase 3: 快速+转音（W7-9）挑战期 ---
+// W7: Whitney快歌
+{name:"I Wanna Dance with Somebody",artist:"Whitney Houston",goal:"wanna=want to！全曲缩略形式大扫荡"},
+{name:"I'm Every Woman",artist:"Whitney Houston",goal:"黑人英语特征：every→/ɛvri/，woman→/wʊmən/"},
+// W8: Mariah高难度
+{name:"Emotions",artist:"Mariah Carey",goal:"海豚音挑战！高音部分能听清几个词？标注出来"},
+{name:"We Belong Together",artist:"Mariah Carey",goal:"R&B语流终极训练：整句不停顿跟读"},
+// W9: 出发前终极检验
+{name:"Where Do Broken Hearts Go",artist:"Whitney Houston",goal:"出发前测试：盲听写出80%歌词算过关"},
+{name:"It's Not Right but It's Okay",artist:"Whitney Houston",goal:"语速最快Whitney！能跟唱60%就是胜利"},
+
+// --- Phase 4: 🇺🇸美国期间（W10-13）文化沉浸 ---
+{name:"Step by Step",artist:"Whitney Houston",goal:"在美国听美国天后！注意美式vs英式发音差异"},
+{name:"Fantasy",artist:"Mariah Carey",goal:"轻快舞曲——试着在美国唱KTV"},
+{name:"Dreamlover",artist:"Mariah Carey",goal:"记录在美国街头听到的英语和歌里的差异"},
+{name:"My All",artist:"Mariah Carey",goal:"慢歌回归：旅途中安静精听，写下5个地道表达"},
+
+// --- Phase 5: 冲刺+收官（W14-16）---
+{name:"When You Believe",artist:"Whitney & Mariah 合唱",goal:"分辨两人声线！标注谁唱哪句——听辨能力终极测试"},
+{name:"I Believe in You and Me",artist:"Whitney Houston",goal:"从头到尾完整跟唱录音——对比Week 1的自己"},
+{name:"One Sweet Day",artist:"Mariah ft. Boyz II Men",goal:"多人合唱分辨：4个声部各唱什么？"},
+// 收官拓展：新歌手
+{name:"Perfect",artist:"Ed Sheeran",goal:"英式发音！对接深国交语言环境——注意/ɑː/和/æ/"},
+{name:"Someone Like You",artist:"Adele",goal:"低音区训练+英式元音——和Whitney/Mariah完全不同"},
+{name:"This Is Me",artist:"The Greatest Showman",goal:"开学自信宣言！背下全部歌词，开学唱给自己听"},
+];
+
+// Get today's song task text based on date
+function getSongTask(d){
+  const diffDays=Math.floor((d-S)/864e5);
+  if(diffDays<0)return {t:'🎵 精听准备：建立歌单播放列表',step:''};
+  // Count workdays (Mon-Fri only, skip travel light days)
+  let workday=0;
+  const cursor=new Date(S);
+  while(cursor<=d){
+    const dw=dow(cursor),tr=tv(cursor);
+    if(!tr&&dw<=5) workday++;
+    cursor.setDate(cursor.getDate()+1);
+  }
+  if(workday<=0)workday=1;
+  const songIdx=Math.floor((workday-1)/3);
+  const dayInSong=(workday-1)%3; // 0,1,2
+  if(songIdx>=SONG_LIST.length) return {t:'🎵 自由精听：复习最喜欢的歌',step:''};
+  const song=SONG_LIST[songIdx];
+  const steps=['🎵 盲听「'+song.name+'」— '+song.artist+'（不看歌词，写下听到的词）','🎵 精读「'+song.name+'」歌词（标注生词+连读+弱读）','🎵 跟唱「'+song.name+'」录音（对比原唱，找差距）'];
+  return {t:steps[dayInSong],step:dayInSong,goal:song.goal};
+}
 // Sport by day of week: Mon=1..Sun=7
 const SPORT_DAY={
   1:{t:'🏃 慢跑3km（有氧基础）',dur:'30min'},
@@ -282,6 +358,9 @@ function tasks(d){const w=wn(d);if(w<1||w>16)return[];const dw=dow(d),t=tv(d),we
   if(t){
     (t.n==='圆石滩'?UR:TR).forEach(x=>r.push({...x,dy:1}));
     if(t.n==='圆石滩'&&w>=11&&w<=13)r.push({s:'math',t:'轻量数学3道题',dy:1,tm:'碎片',dur:''});
+    // Travel song — lighter
+    const sg=getSongTask(d);
+    if(t.n==='圆石滩')r.push({s:'eng',t:sg.t,dy:1,tm:'碎片',dur:''});
     // Travel sport
     const sp=t.n==='圆石滩'?SPORT_US[dw]:SPORT_JP[dw];
     if(sp)r.push({s:'sport',t:sp.t,dy:1,tm:t.n==='圆石滩'?'下午':'白天',dur:sp.dur});
@@ -292,7 +371,12 @@ function tasks(d){const w=wn(d);if(w<1||w>16)return[];const dw=dow(d),t=tv(d),we
     const sp=SPORT_DAY[dw];
     if(sp)r.push({s:'sport',t:sp.t,dy:1,tm:'15:00',dur:sp.dur});
   } else {
-    DR.forEach(x=>r.push({...x,dy:1}));
+    // Weekday: replace __SONG__ placeholder
+    const sg=getSongTask(d);
+    DR.forEach(x=>{
+      if(x.t==='__SONG__') r.push({...x,t:sg.t,dy:1});
+      else r.push({...x,dy:1});
+    });
     // Weekday sport
     const sp=SPORT_DAY[dw];
     if(sp)r.push({s:'sport',t:sp.t,dy:1,tm:'16:00',dur:sp.dur});
