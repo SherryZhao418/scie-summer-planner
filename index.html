@@ -230,10 +230,34 @@ function wn(d){const diff=(d-S)/864e5;if(diff<0)return 0;return Math.min(16,Math
 function dow(d){const w=d.getDay();return w===0?7:w;}
 function ds(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 
-const DR=[{s:'math',t:'🔢 数学学习+练习',k:1,tm:'09:00',dur:'90min'},{s:'eng',t:'📖 词汇书 1 Chapter',k:1,tm:'10:45',dur:'30min'},{s:'eng',t:'🇬🇧 英语阅读/精听',tm:'11:15',dur:'30min'},{s:'eng',t:'🎵 英语歌精听/跟唱',tm:'14:00',dur:'30min'},{s:'eng',t:'📖 英文书阅读',tm:'14:30',dur:'30min'},{s:'sport',t:'🏃 运动（慢跑/健身/跑步机/游泳）',tm:'16:00',dur:'30min'},{s:'piano',t:'🎹 钢琴练习',tm:'20:00',dur:'30min'},{s:'eng',t:'📖 睡前轻松阅读',tm:'21:00',dur:'30min'}];
-const TR=[{s:'eng',t:'📖 词汇书 1 Chapter',k:1,tm:'碎片',dur:''},{s:'eng',t:'✍️ 英文旅行日记 3-5句',tm:'晚上',dur:''},{s:'sport',t:'🚶 步行/徒步探索',tm:'白天',dur:''}];
-const UR=[{s:'eng',t:'📖 词汇书 1 Chapter',k:1,tm:'碎片',dur:''},{s:'eng',t:'✍️ 英文旅行日记',tm:'晚上',dur:''},{s:'eng',t:'🗣️ 英文对话至少1次',tm:'白天',dur:''},{s:'sport',t:'🏄 运动：跑步/冲浪/徒步',tm:'下午',dur:''}];
-const WR=[{s:'eng',t:'📖 词汇书 1 Chapter',k:1,tm:'10:00',dur:'30min'},{s:'eng',t:'📖 轻松阅读英文书',tm:'11:00',dur:'30min'},{s:'sport',t:'🏃 运动（周末加量！跑步/球类/游泳）',tm:'15:00',dur:'45min'}];
+const DR=[{s:'math',t:'🔢 数学学习+练习',k:1,tm:'09:00',dur:'90min'},{s:'eng',t:'📖 词汇书 1 Chapter',k:1,tm:'10:45',dur:'30min'},{s:'eng',t:'🇬🇧 英语阅读/精听',tm:'11:15',dur:'30min'},{s:'eng',t:'🎵 英语歌精听/跟唱',tm:'14:00',dur:'30min'},{s:'eng',t:'📖 英文书阅读',tm:'14:30',dur:'30min'},{s:'piano',t:'🎹 钢琴练习',tm:'20:00',dur:'30min'},{s:'eng',t:'📖 睡前轻松阅读',tm:'21:00',dur:'30min'}];
+// Sport by day of week: Mon=1..Sun=7
+const SPORT_DAY={
+  1:{t:'🏃 慢跑3km（有氧基础）',dur:'30min'},
+  2:{t:'🏋️ 健身房撸铁（上肢+核心）',dur:'40min'},
+  3:{t:'🏃‍♂️ 跑步机间歇跑（快慢交替）',dur:'30min'},
+  4:{t:'🏃 慢跑3km + 拉伸',dur:'30min'},
+  5:{t:'🏋️ 健身房撸铁（下肢+背）',dur:'40min'},
+  6:{t:'🏊 游泳 / ⚽ 球类运动（周末开心练）',dur:'45min'},
+  7:{t:'🧘 休息日：散步或瑜伽拉伸',dur:'30min'},
+};
+// US travel sport by day
+const SPORT_US={
+  1:{t:'🏊 海边游泳',dur:''},
+  2:{t:'🏃 海滩晨跑3km',dur:''},
+  3:{t:'🏄 冲浪/水上运动',dur:''},
+  4:{t:'🚶 徒步探索自然步道',dur:''},
+  5:{t:'🏋️ 酒店健身房',dur:''},
+  6:{t:'🏊 游泳 + 海滩排球',dur:''},
+  7:{t:'🧘 休息放松，海边散步',dur:''},
+};
+// JP travel sport
+const SPORT_JP={
+  1:{t:'🚶 徒步探索（北海道自然风光）',dur:''},2:{t:'🚶 步行观光',dur:''},3:{t:'🚶 徒步',dur:''},4:{t:'🚶 步行探索',dur:''},5:{t:'🚶 徒步',dur:''},6:{t:'🚶 步行观光',dur:''},7:{t:'🧘 休息',dur:''},
+};
+const TR=[{s:'eng',t:'📖 词汇书 1 Chapter',k:1,tm:'碎片',dur:''},{s:'eng',t:'✍️ 英文旅行日记 3-5句',tm:'晚上',dur:''}];
+const UR=[{s:'eng',t:'📖 词汇书 1 Chapter',k:1,tm:'碎片',dur:''},{s:'eng',t:'✍️ 英文旅行日记',tm:'晚上',dur:''},{s:'eng',t:'🗣️ 英文对话至少1次',tm:'白天',dur:''}];
+const WR=[{s:'eng',t:'📖 词汇书 1 Chapter',k:1,tm:'10:00',dur:'30min'},{s:'eng',t:'📖 轻松阅读英文书',tm:'11:00',dur:'30min'}];
 
 const WS={1:[{d:1,s:'math',t:'购买/下载 IGCSE 0580 教材',k:1},{d:1,s:'math',t:'注册 Save My Exams + Dr. Frost'},{d:2,s:'math',t:'做一套IGCSE数学诊断卷',k:1},{d:3,s:'math',t:'建立错题本'},{d:3,s:'eng',t:'下载 Magoosh APP'},{d:4,s:'math',t:'学习 Number 模块'},{d:4,s:'eng',t:'选3首英文歌精听 🎵'},{d:5,s:'eng',t:'选第一本书 The Alchemist'},{d:5,s:'sci',t:'🔬 看 Veritasium / Mark Rober'},{d:5,s:'speech',t:'🎤 看TED演讲：Do Schools Kill Creativity（Ken Robinson）'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #1「暑假第一天」'},{d:7,s:'vlog',t:'🎬 注册账号，确定定位'},{d:7,s:'sport',t:'🏃 跑步3km 测试基础体能'}],
 2:[{d:1,s:'math',t:'HCF/LCM + Standard Form',k:1},{d:2,s:'math',t:'有效数字 + 比例 + 利率'},{d:3,s:'math',t:'10道 Number 练习题 + 背术语'},{d:3,s:'speech',t:'🎤 看辩论视频：Oxford Union 精彩辩论集锦'},{d:4,s:'eng',t:'🎬 看一部英文电影'},{d:5,s:'sci',t:'🔬 TED-Ed 过山车物理学'},{d:5,s:'math',t:'10道 Number 练习题'},{d:5,s:'speech',t:'🗣️ 对镜练习1min英文自我介绍'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #2「我的学习角」'},{d:7,s:'math',t:'Number 模块小测（计时）',k:1},{d:7,s:'eng',t:'学会完整唱1首英文歌 🎵'}],
@@ -255,11 +279,26 @@ const WS={1:[{d:1,s:'math',t:'购买/下载 IGCSE 0580 教材',k:1},{d:1,s:'math
 // Time slot mapping for special task subjects
 const TM_MAP={math:'09:00',eng:'14:00',sci:'15:00',piano:'20:00',vlog:'15:30',act:'15:00',sport:'16:00',speech:'19:30'};
 function tasks(d){const w=wn(d);if(w<1||w>16)return[];const dw=dow(d),t=tv(d),we=dw>=6,r=[];
-  if(t){(t.n==='圆石滩'?UR:TR).forEach(x=>r.push({...x,dy:1}));if(t.n==='圆石滩'&&w>=11&&w<=13)r.push({s:'math',t:'轻量数学3道题',dy:1,tm:'碎片',dur:''});}
-  else if(we){WR.forEach(x=>r.push({...x,dy:1}));if(dw===6&&![3,10,11,12,13].includes(w))r.push({s:'piano',t:'🎹 钢琴 30min',dy:1,tm:'20:00',dur:'30min'});}
-  else DR.forEach(x=>r.push({...x,dy:1}));
+  if(t){
+    (t.n==='圆石滩'?UR:TR).forEach(x=>r.push({...x,dy:1}));
+    if(t.n==='圆石滩'&&w>=11&&w<=13)r.push({s:'math',t:'轻量数学3道题',dy:1,tm:'碎片',dur:''});
+    // Travel sport
+    const sp=t.n==='圆石滩'?SPORT_US[dw]:SPORT_JP[dw];
+    if(sp)r.push({s:'sport',t:sp.t,dy:1,tm:t.n==='圆石滩'?'下午':'白天',dur:sp.dur});
+  } else if(we){
+    WR.forEach(x=>r.push({...x,dy:1}));
+    if(dw===6&&![3,10,11,12,13].includes(w))r.push({s:'piano',t:'🎹 钢琴练习',dy:1,tm:'20:00',dur:'30min'});
+    // Weekend sport
+    const sp=SPORT_DAY[dw];
+    if(sp)r.push({s:'sport',t:sp.t,dy:1,tm:'15:00',dur:sp.dur});
+  } else {
+    DR.forEach(x=>r.push({...x,dy:1}));
+    // Weekday sport
+    const sp=SPORT_DAY[dw];
+    if(sp)r.push({s:'sport',t:sp.t,dy:1,tm:'16:00',dur:sp.dur});
+  }
   (WS[w]||[]).filter(x=>x.d===dw).forEach(x=>r.push({s:x.s,t:x.t,k:x.k,tm:TM_MAP[x.s]||'15:00',dur:''}));
-  // Sort by time (numeric times first, then text times)
+  // Sort by time
   r.sort((a,b)=>{const ta=a.tm||'99',tb=b.tm||'99';const na=parseFloat(ta),nb=parseFloat(tb);if(!isNaN(na)&&!isNaN(nb))return na-nb;if(!isNaN(na))return -1;if(!isNaN(nb))return 1;return 0;});
   return r;}
 
