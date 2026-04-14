@@ -273,24 +273,99 @@ function getReadTasks(d){
     const bwd=getBookWorkday(d,14,16);
     chapterGuide=pages[Math.min(bwd,7)]||'复习';
   }
-  // AM reading: alternating BBC/TED-Ed/book intensive
-  const amTypes=[
-    `🇬🇧 精读1篇BBC新闻 <a href="${BBC}" target="_blank" style="color:var(--accent);">BBC News</a>（标注10个生词+1句摘抄）`,
-    `🇬🇧 <a href="${BBCL}" target="_blank" style="color:var(--accent);">BBC Learning English</a> 1课（跟读+记笔记）`,
-    `🇬🇧 精读「${book}」当前章节中1段（逐句翻译+分析句式）`,
-    `🇬🇧 <a href="https://www.youtube.com/@TEDEd" target="_blank" style="color:var(--accent);">TED-Ed</a> 看1集+写英文总结3句`,
-    `🇬🇧 精读1篇BBC新闻 <a href="${BBC}" target="_blank" style="color:var(--accent);">BBC News</a>（练习段落大意概括）`,
-  ];
-  const am=amTypes[(dw-1)%amTypes.length];
-  // PM: book chapter
+  // === AM READING: matches current week's academic focus ===
+  // Goal: build academic English + subject vocabulary for SCIE full-English classes
+  let am;
+  if(w<=2){
+    // Number周 → 数学/科学新闻精读
+    const amW1=[
+      `🇬🇧 精读 <a href="https://www.bbc.com/news/science-environment" target="_blank" style="color:var(--accent);">BBC Science</a> 1篇（标注10个学术词汇）· <span style="color:var(--dim);font-size:10px;">目标：积累IGCSE理科英文表达</span>`,
+      `🇬🇧 <a href="${BBCL}" target="_blank" style="color:var(--accent);">BBC Learning English</a> 语法1课（跟读+记笔记）· <span style="color:var(--dim);font-size:10px;">目标：巩固英文语法基础</span>`,
+      `🇬🇧 精读「${book}」1段（逐句翻译+标注叙事手法）· <span style="color:var(--dim);font-size:10px;">目标：学习英文叙事写作结构</span>`,
+      `🇬🇧 <a href="https://ed.ted.com/lessons?category=math" target="_blank" style="color:var(--accent);">TED-Ed数学</a> 看1集+写3句英文总结 · <span style="color:var(--dim);font-size:10px;">目标：数学思维+英文表达同步</span>`,
+      `🇬🇧 精读 <a href="https://www.economist.com/" target="_blank" style="color:var(--accent);">The Economist</a> 1段（分析论证结构）· <span style="color:var(--dim);font-size:10px;">目标：议论文阅读能力→对接IGCSE English</span>`,
+    ];am=amW1[(dw-1)%5];
+  } else if(w<=5){
+    // Algebra周 → 逻辑/推理类阅读
+    const amW35=[
+      `🇬🇧 精读 <a href="https://www.bbc.com/future" target="_blank" style="color:var(--accent);">BBC Future</a> 1篇科技文（标注因果逻辑词：therefore/hence/thus）· <span style="color:var(--dim);font-size:10px;">目标：学术写作逻辑词积累</span>`,
+      `🇬🇧 <a href="${BBCL}" target="_blank" style="color:var(--accent);">BBC Learning</a> 学术英语1课 · <span style="color:var(--dim);font-size:10px;">目标：IGCSE课堂常用句型</span>`,
+      `🇬🇧 精读「${book}」1段（分析人物心理描写手法）· <span style="color:var(--dim);font-size:10px;">目标：English Literature分析能力</span>`,
+      `🇬🇧 <a href="https://ed.ted.com/lessons?category=science" target="_blank" style="color:var(--accent);">TED-Ed科学</a> 1集+英文笔记 · <span style="color:var(--dim);font-size:10px;">目标：跨学科英语听读能力</span>`,
+      `🇬🇧 精读 <a href="https://www.theguardian.com/education" target="_blank" style="color:var(--accent);">The Guardian教育版</a>（了解英式教育观点）· <span style="color:var(--dim);font-size:10px;">目标：适应深国交的英式教育语境</span>`,
+    ];am=amW35[(dw-1)%5];
+  } else if(w<=8){
+    // Geometry+Trig+Functions → 理工科阅读
+    const amW68=[
+      `🇬🇧 精读 <a href="https://www.newscientist.com/" target="_blank" style="color:var(--accent);">New Scientist</a> 1篇（标注科学术语+写1句main idea）· <span style="color:var(--dim);font-size:10px;">目标：理科英文阅读速度</span>`,
+      `🇬🇧 <a href="https://ed.ted.com/lessons?category=math" target="_blank" style="color:var(--accent);">TED-Ed</a> 几何/物理相关1集+笔记 · <span style="color:var(--dim);font-size:10px;">目标：配合当周数学/物理学习</span>`,
+      `🇬🇧 精读「${book}」1段（分析作者论证方法：举例/对比/数据）· <span style="color:var(--dim);font-size:10px;">目标：非虚构写作技巧→对接IGCSE议论文</span>`,
+      `🇬🇧 <a href="https://www.bbc.com/news/science-environment" target="_blank" style="color:var(--accent);">BBC Science</a> 物理/工程类新闻精读 · <span style="color:var(--dim);font-size:10px;">目标：Forces/Energy相关词汇</span>`,
+      `🇬🇧 精读 <a href="https://www.economist.com/" target="_blank" style="color:var(--accent);">The Economist</a> 经济版1段 · <span style="color:var(--dim);font-size:10px;">目标：经济学选课英语预备</span>`,
+    ];am=amW68[(dw-1)%5];
+  } else if(w<=13){
+    // 美国旅行前后 → 美国文化+申请相关
+    const amW913=[
+      `🇬🇧 精读 <a href="https://www.nytimes.com/" target="_blank" style="color:var(--accent);">New York Times</a> 1篇（美国视角+分析立场）· <span style="color:var(--dim);font-size:10px;">目标：理解美国主流媒体叙事</span>`,
+      `🇬🇧 读1篇 <a href="https://www.collegeessayguy.com/blog" target="_blank" style="color:var(--accent);">College Essay Guy</a> 范文 · <span style="color:var(--dim);font-size:10px;">目标：开始感受美本文书的写作风格</span>`,
+      `🇬🇧 精读「${book}」1段（分析象征手法/主题表达）· <span style="color:var(--dim);font-size:10px;">目标：文学分析→English Literature核心能力</span>`,
+      `🇬🇧 <a href="https://ed.ted.com/" target="_blank" style="color:var(--accent);">TED-Ed</a> 社会/文化类1集 · <span style="color:var(--dim);font-size:10px;">目标：拓宽视野，积累文书素材</span>`,
+      `🇬🇧 精读 <a href="https://www.theatlantic.com/" target="_blank" style="color:var(--accent);">The Atlantic</a> 1篇深度文章 · <span style="color:var(--dim);font-size:10px;">目标：长文阅读耐力训练</span>`,
+    ];am=amW913[(dw-1)%5];
+  } else {
+    // W14-16 冲刺 → 全面对接深国交+申请
+    const amW1416=[
+      `🇬🇧 读1篇深国交学长经验帖 <a href="https://www.xiaohongshu.com/search_result?keyword=深国交" target="_blank" style="color:var(--accent);">小红书</a> · <span style="color:var(--dim);font-size:10px;">目标：了解真实G1学习生活</span>`,
+      `🇬🇧 读1篇 <a href="https://www.collegeessayguy.com/blog" target="_blank" style="color:var(--accent);">美本文书范文</a>（分析开头hook手法）· <span style="color:var(--dim);font-size:10px;">目标：为未来文书写作打底</span>`,
+      `🇬🇧 精读「${book}」1段（论证结构分析：claim→evidence→reasoning）· <span style="color:var(--dim);font-size:10px;">目标：IGCSE English议论文框架</span>`,
+      `🇬🇧 <a href="https://www.theguardian.com/education" target="_blank" style="color:var(--accent);">Guardian教育版</a> 英国教育新闻 · <span style="color:var(--dim);font-size:10px;">目标：适应英式教育语境</span>`,
+      `🇬🇧 读 <a href="https://www.bbc.co.uk/bitesize/subjects/zj26n39" target="_blank" style="color:var(--accent);">BBC Bitesize IGCSE English</a> · <span style="color:var(--dim);font-size:10px;">目标：直接预习IGCSE考试内容</span>`,
+    ];am=amW1416[(dw-1)%5];
+  }
+
+  // PM: book chapter (unchanged)
   const pm=`📖「${book}」${chapterGuide} <a href="${bookUrl}" target="_blank" style="color:var(--accent);">🛒</a>`;
-  // Night: light reading
-  const nightTypes=[
-    `📖 睡前轻松读「${book}」（不做笔记，享受阅读）`,
-    `📖 睡前浏览 <a href="https://www.reddit.com/r/todayilearned/" target="_blank" style="color:var(--accent);">Reddit TIL</a>（练informal英语）`,
-    `📖 睡前读 <a href="https://www.nationalgeographic.com/" target="_blank" style="color:var(--accent);">National Geographic</a> 一篇`,
-  ];
-  const night=nightTypes[(dw-1)%nightTypes.length];
+
+  // === NIGHT READING: every minute serves the goal ===
+  let night;
+  if(w<=3){
+    // Phase 1启动：睡前继续读当前书+简单英文培养语感
+    const nW13=[
+      `📖 睡前继续读「${book}」下一章预览（不做笔记，培养英文阅读速度）`,
+      `📖 睡前读 <a href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english" target="_blank" style="color:var(--accent);">BBC 6 Minute English</a> 文稿 · <span style="color:var(--dim);font-size:10px;">短小精悍，积累口语表达</span>`,
+      `📖 睡前读 <a href="https://ed.ted.com/" target="_blank" style="color:var(--accent);">TED-Ed</a> 一篇文字版课程笔记 · <span style="color:var(--dim);font-size:10px;">拓宽知识面，积累话题素材</span>`,
+      `📖 睡前继续读「${book}」（享受故事，建立英文阅读的快乐感）`,
+      `📖 睡前读 <a href="https://www.goodreads.com/quotes" target="_blank" style="color:var(--accent);">Goodreads名言</a> 10句 · <span style="color:var(--dim);font-size:10px;">收集喜欢的句子→未来文书可用</span>`,
+    ];night=nW13[(dw-1)%5];
+  } else if(w<=8){
+    // Phase 1-2：加入选课方向相关阅读
+    const nW48=[
+      `📖 睡前读「${book}」下一章预览`,
+      `📖 睡前读 <a href="https://www.economist.com/the-world-this-week" target="_blank" style="color:var(--accent);">The Economist本周世界</a> · <span style="color:var(--dim);font-size:10px;">经济学选课预备：了解全球经济动态</span>`,
+      `📖 睡前读 <a href="https://www.nationalgeographic.com/environment/" target="_blank" style="color:var(--accent);">Nat Geo环境版</a> · <span style="color:var(--dim);font-size:10px;">地理选课预备：气候/生态英文阅读</span>`,
+      `📖 睡前读 <a href="https://www.quantamagazine.org/" target="_blank" style="color:var(--accent);">Quanta Magazine</a> 1篇 · <span style="color:var(--dim);font-size:10px;">数学/物理前沿科普，培养STEM兴趣</span>`,
+      `📖 睡前读 <a href="https://www.goodreads.com/quotes" target="_blank" style="color:var(--accent);">Goodreads名言</a> + 摘抄3句到笔记本 · <span style="color:var(--dim);font-size:10px;">文书素材库</span>`,
+    ];night=nW48[(dw-1)%5];
+  } else if(w<=13){
+    // 美国期间：读美国本土内容
+    const nW913=[
+      `📖 在美国读「${book}」（感受书中场景和现实的对照）`,
+      `📖 睡前读当地报纸/杂志 · <span style="color:var(--dim);font-size:10px;">真实美式英语 vs 课本英语的差异</span>`,
+      `📖 睡前读 <a href="https://www.collegeessayguy.com/blog" target="_blank" style="color:var(--accent);">College Essay Guy</a> 1篇范文 · <span style="color:var(--dim);font-size:10px;">在美国读美本文书，感受更真实</span>`,
+      `📖 睡前写英文日记（把今天的经历用3种不同句式写出来）· <span style="color:var(--dim);font-size:10px;">写作能力才是申请的终极壁垒</span>`,
+      `📖 睡前读「${book}」（享受阅读）`,
+    ];night=nW913[(dw-1)%5];
+  } else {
+    // W14-16冲刺：全面对接深国交和申请
+    const nW1416=[
+      `📖 睡前读「${book}」最后几章（冲刺完成）`,
+      `📖 睡前读 <a href="https://www.bbc.co.uk/bitesize/subjects/zj26n39" target="_blank" style="color:var(--accent);">BBC Bitesize IGCSE English</a> · <span style="color:var(--dim);font-size:10px;">直接预习考试内容</span>`,
+      `📖 睡前读深国交学长选课经验 <a href="https://www.xiaohongshu.com/search_result?keyword=深国交选课" target="_blank" style="color:var(--accent);">小红书</a> · <span style="color:var(--dim);font-size:10px;">为选课做最后确认</span>`,
+      `📖 睡前回顾暑假摘抄的所有好句子 · <span style="color:var(--dim);font-size:10px;">这就是你未来文书的素材库</span>`,
+      `📖 睡前读 <a href="https://www.collegeessayguy.com/blog" target="_blank" style="color:var(--accent);">College Essay范文</a> + 想象自己的故事 · <span style="color:var(--dim);font-size:10px;">从今天开始酝酿你的Personal Statement</span>`,
+    ];night=nW1416[(dw-1)%5];
+  }
+
   return {am,pm,night};
 }
 
