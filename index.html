@@ -291,24 +291,29 @@ function taskHtml(ts,dstr){
 }
 
 function renderToday(){
-  const now=new Date();now.setHours(0,0,0,0);const d=ds(now),ts=tasks(now);
+  const now=new Date();now.setHours(0,0,0,0);
+  const showDate=now<S?S:now>E?E:now;
+  const d=ds(showDate),ts=tasks(showDate);
   const dn=['日','一','二','三','四','五','六'];
-  document.getElementById('tcDate').textContent=`${now.getMonth()+1}月${now.getDate()}日 周${dn[now.getDay()]}`;
+  const prefix=now<S?'🚀 即将开始 · ':'';
+  document.getElementById('tcDate').textContent=`${prefix}${showDate.getMonth()+1}月${showDate.getDate()}日 周${dn[showDate.getDay()]}`;
   let done=0;ts.forEach((_,i)=>{if(ic(d,i))done++;});
   const pct=ts.length?Math.round(done/ts.length*100):0;
   document.getElementById('tcPct').textContent=ts.length?`${done}/${ts.length}`:'';
   document.getElementById('tcBar').style.width=pct+'%';
   const c=document.getElementById('tcTasks');
-  if(!ts.length){c.innerHTML='<div class="tc-empty">暑假还没开始呢，先看看日历规划吧 😊</div>';return;}
+  if(!ts.length){c.innerHTML='<div class="tc-empty">暑假还没开始呢 😊</div>';return;}
   c.innerHTML=taskHtml(ts,d);
 }
 function renderStats(){
-  const now=new Date();now.setHours(0,0,0,0);const d=ds(now),ts=tasks(now);
+  const now=new Date();now.setHours(0,0,0,0);
+  const showDate=now<S?S:now>E?E:now;
+  const d=ds(showDate),ts=tasks(showDate);
   let done=0;ts.forEach((_,i)=>{if(ic(d,i))done++;});
   document.getElementById('sDone').textContent=done;
   document.getElementById('sTotal').textContent=ts.length;
   document.getElementById('sStreak').textContent=st.sk||0;
-  const w=wn(now);document.getElementById('sWeek').textContent=w>0&&w<=16?`W${w}`:'--';
+  const w=wn(showDate);document.getElementById('sWeek').textContent=w>0&&w<=16?`W${w}`:'--';
 }
 function renderCal(){
   const mn=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
@@ -415,10 +420,13 @@ function fE(e){const el=document.createElement('div');el.className='fe';el.textC
 function sendMsg(){const i=document.getElementById('cMsg'),t=i.value.trim();if(!t)return;let n=localStorage.getItem('scie-cheer-name');if(!n){n=prompt('你的称呼？');if(!n)return;localStorage.setItem('scie-cheer-name',n);}const d=lC();const now=new Date();d.messages.push({name:n,text:t,time:`${now.getMonth()+1}.${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`});d.count++;sC(d);i.value='';rC();toast('💌 留言成功！');cBurst();}
 
 // Init
-ld();render();rC();
-// Set calendar to current month
-calMonth=new Date().getMonth();calYear=new Date().getFullYear();
-selDay=ds(new Date());renderCal();renderDetail(selDay);
+ld();
+// Default selection: if before summer, show 4.20; if during, show today; if after, show 8.10
+const _now=new Date();_now.setHours(0,0,0,0);
+const _def=_now<S?S:_now>E?E:_now;
+calMonth=_def.getMonth();calYear=_def.getFullYear();
+selDay=ds(_def);
+render();rC();renderCal();renderDetail(selDay);
 </script>
 </body>
 </html>
