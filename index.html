@@ -230,7 +230,94 @@ function wn(d){const diff=(d-S)/864e5;if(diff<0)return 0;return Math.min(16,Math
 function dow(d){const w=d.getDay();return w===0?7:w;}
 function ds(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 
-const DR=[{s:'math',t:'🔢 数学学习+练习',k:1,tm:'09:00',dur:'90min'},{s:'eng',t:'📖 词汇书 1 Chapter',k:1,tm:'10:45',dur:'30min'},{s:'eng',t:'🇬🇧 英语阅读/精听',tm:'11:15',dur:'30min'},{s:'eng',t:'__SONG__',tm:'14:00',dur:'30min'},{s:'eng',t:'📖 英文书阅读',tm:'14:30',dur:'30min'},{s:'piano',t:'🎹 钢琴练习',tm:'20:00',dur:'30min'},{s:'eng',t:'📖 睡前轻松阅读',tm:'21:00',dur:'30min'}];
+const DR=[{s:'math',t:'__MATH__',k:1,tm:'09:00',dur:'90min'},{s:'eng',t:'📖 词汇书 1 Chapter',k:1,tm:'10:45',dur:'30min'},{s:'eng',t:'🇬🇧 英语阅读/精听',tm:'11:15',dur:'30min'},{s:'eng',t:'__SONG__',tm:'14:00',dur:'30min'},{s:'eng',t:'📖 英文书阅读',tm:'14:30',dur:'30min'},{s:'piano',t:'🎹 钢琴练习',tm:'20:00',dur:'30min'},{s:'eng',t:'📖 睡前轻松阅读',tm:'21:00',dur:'30min'}];
+
+// ===== MATH DAILY CURRICULUM =====
+// IGCSE 0580 Extended, ~65 workdays mapped to topic progression
+const MATH_DAYS=[
+// W1 Number基础
+{t:'🔢 诊断测试：做一套IGCSE真题找薄弱点',n:'计时2h，标注每题用时'},
+{t:'🔢 整数性质：HCF/LCM/质因数分解',n:'短除法，练到3min内'},
+{t:'🔢 HCF/LCM练习15题',n:'Dr.Frost在线+错题记录'},
+{t:'🔢 分数四则运算+混合运算',n:'注意括号优先级'},
+{t:'🔢 分数/小数/百分数互换20题',n:'速度训练：每题<1min'},
+// W2 Number进阶
+{t:'🔢 Standard Form科学记数法',n:'1≤a<10, a×10^n'},
+{t:'🔢 Standard Form计算练习',n:'加减乘除+指数运算'},
+{t:'🔢 Ratio比例+正反比',n:'直接比/间接比/三量比'},
+{t:'🔢 百分比变化+复利计算',n:'compound interest公式'},
+{t:'🔢 Number模块小测30min',n:'对比诊断卷记录进步'},
+// W3 Algebra入门(3天,后2天北海道)
+{t:'🔢 展开括号Expanding',n:'单→双→三项式'},
+{t:'🔢 化简代数式+代入法',n:'collect like terms'},
+{t:'🔢 因式分解：提公因式法',n:'反向验证'},
+// W4 Algebra方程
+{t:'🔢 一元一次方程(含分数系数)',n:'目标3步内解完'},
+{t:'🔢 一元一次方程练习20题',n:'word problems文字题'},
+{t:'🔢 一元二次方程：因式分解法',n:'两数之积=c，和=b'},
+{t:'🔢 一元二次方程：公式法',n:'背下公式！'},
+{t:'🔢 联立方程：消元法+代入法',n:'两种方法各练5题'},
+// W5 Algebra拓展
+{t:'🔢 不等式：解法+数轴表示',n:'乘除负数变号！'},
+{t:'🔢 不等式练习15题(含图示)',n:'数轴画解集'},
+{t:'🔢 数列：找规律+nth term',n:'a+(n-1)d'},
+{t:'🔢 代数分式：化简+加减',n:'先因式分解再通分'},
+{t:'🔢 Algebra综合测试30题',n:'W3-5内容，计时45min'},
+// W6 Geometry
+{t:'🔢 角度关系：对顶角/同位角/内错角',n:'平行线8种角'},
+{t:'🔢 三角形：内角和+外角+全等',n:'SSS/SAS/ASA/RHS'},
+{t:'🔢 四边形性质+面积公式',n:'平行四边形/梯形/菱形'},
+{t:'🔢 Circle Theorems(上)',n:'弦切角/圆心角/圆周角'},
+{t:'🔢 Circle Theorems(下)+证明题10道',n:''},
+// W7 Geometry进阶+收尾
+{t:'🔢 坐标几何：y=mx+c',n:'求斜率+截距+画图'},
+{t:'🔢 两直线：平行/垂直/交点',n:'m₁×m₂=-1'},
+{t:'🔢 面积与体积：棱柱/圆柱/锥/球',n:'制作公式卡'},
+{t:'🔢 模拟卷Paper 2(计时1.5h)',n:'模拟真实考试'},
+{t:'🔢 批改+错题分析',n:'对比W1诊断卷📈'},
+// W8 Trig+Functions
+{t:'🔢 三角比：SOH CAH TOA',n:'sin=对/斜 cos=邻/斜 tan=对/邻'},
+{t:'🔢 三角比应用：仰角俯角',n:'画图标注已知'},
+{t:'🔢 正弦定理+余弦定理',n:'判断用哪个'},
+{t:'🔢 函数：f(x)+代入+复合',n:'f(g(x))从里到外'},
+{t:'🔢 线性+二次函数图像',n:'顶点和对称轴'},
+// W9 Statistics+出发前
+{t:'🔢 统计：均值/中位数/众数/四分位',n:'grouped data'},
+{t:'🔢 频率直方图+累积频率曲线',n:'画图+读数'},
+{t:'🔢 概率：树状图',n:'P(A and B)=P(A)×P(B)'},
+{t:'🔢 条件概率+韦恩图',n:'with/without replacement'},
+{t:'🔢 全模块错题快速复盘',n:'每模块挑3道重做'},
+// W10 出发前
+{t:'🔢 模拟卷Paper 4(计时2.5h)',n:'Extended终极'},
+{t:'🔢 批改+制作旅行公式卡',n:'带走复习'},
+// W14 回国恢复
+{t:'🔢 回国恢复：做真题找手感',n:'不计时'},
+{t:'🔢 Number+Algebra错题重做',n:'检查遗忘'},
+{t:'🔢 Geometry+Trig错题重做',n:'Circle Theorems易忘'},
+{t:'🔢 Statistics+Functions复习',n:'树状图+函数图'},
+{t:'🔢 综合20题查漏补缺',n:'各模块各4题'},
+// W15 冲刺
+{t:'🔢 纯英文做IGCSE题',n:'模拟深国交全英课堂'},
+{t:'🔢 Paper 2模拟(计时)',n:'目标比W7提升15%'},
+{t:'🔢 Paper 4模拟(计时)',n:'Extended全真'},
+{t:'🔢 批改+错题精华本',n:'考前必看'},
+{t:'🔢 全模块最终测评',n:'自评A*/A/B？对比W1的C'},
+// W16 收官
+{t:'🔢 复习"考前必看"错题本',n:'说出解题思路'},
+{t:'🔢 最新年份真题(终极检验)',n:'计时+全英文步骤'},
+{t:'🔢 写数学总结：从C到?的旅程',n:'开学带上它'},
+];
+
+function getMathTask(d){
+  const diffDays=Math.floor((d-S)/864e5);
+  if(diffDays<0)return '🔢 数学准备：浏览IGCSE 0580考纲';
+  let mday=0;const cursor=new Date(S);
+  while(cursor<=d){const dw=dow(cursor),tr=tv(cursor);if(!tr&&dw<=5)mday++;cursor.setDate(cursor.getDate()+1);}
+  if(mday<=0)mday=1;const idx=mday-1;
+  if(idx>=MATH_DAYS.length)return '🔢 自由复习：挑薄弱模块刷题';
+  const m=MATH_DAYS[idx];
+  return m.t+(m.n?' <span style="font-size:10px;color:var(--dim);">· '+m.n+'</span>':'');
+}
 
 // ===== SONG CURRICULUM =====
 // 36 songs × 3 days each = 108 workdays (covers 16 weeks)
@@ -371,10 +458,12 @@ function tasks(d){const w=wn(d);if(w<1||w>16)return[];const dw=dow(d),t=tv(d),we
     const sp=SPORT_DAY[dw];
     if(sp)r.push({s:'sport',t:sp.t,dy:1,tm:'15:00',dur:sp.dur});
   } else {
-    // Weekday: replace __SONG__ placeholder
+    // Weekday: replace __SONG__ and __MATH__ placeholders
     const sg=getSongTask(d);
+    const mt=getMathTask(d);
     DR.forEach(x=>{
       if(x.t==='__SONG__') r.push({...x,t:sg.t,dy:1});
+      else if(x.t==='__MATH__') r.push({...x,t:mt,dy:1});
       else r.push({...x,dy:1});
     });
     // Weekday sport
