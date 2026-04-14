@@ -201,14 +201,17 @@ body{font-family:'Nunito',-apple-system,BlinkMacSystemFont,sans-serif;background
     <div class="tb"><div class="tl">10:45</div><div class="td" style="background:#0984e3"></div><div class="tc"><div class="tt">📖 词汇书 1 Chapter</div><div class="tdesc">Magoosh / TOEFL词以类记</div></div></div>
     <div class="tb"><div class="tl">11:15</div><div class="td" style="background:#0984e3"></div><div class="tc"><div class="tt">🇬🇧 英语阅读/精听</div><div class="tdesc">BBC / 原版书 / 英文歌</div></div></div>
   </div>
-  <div class="scard"><h3>🌤️ 下午（2h）</h3>
+  <div class="scard"><h3>🌤️ 下午（2.5h）</h3>
     <div class="tb"><div class="tl">14:00</div><div class="td" style="background:#0984e3"></div><div class="tc"><div class="tt">🎵 英语歌/TED + 阅读</div><div class="tdesc">歌词听写跟唱 + 英文书</div></div></div>
     <div class="tb"><div class="tl">15:00</div><div class="td" style="background:#fdcb6e"></div><div class="tc"><div class="tt">🎨 活动/理化/自由探索</div><div class="tdesc">物理视频/项目/Vlog</div></div></div>
+    <div class="tb"><div class="tl">16:00</div><div class="td" style="background:#06b6d4"></div><div class="tc"><div class="tt">🏃 运动 30-45min</div><div class="tdesc">慢跑3km / 健身房撸铁 / 跑步机 / 游泳 / 球类</div></div></div>
   </div>
   <div class="scard"><h3>🌙 晚上</h3>
+    <div class="tb"><div class="tl">19:30</div><div class="td" style="background:#f472b6"></div><div class="tc"><div class="tt">🎤 演讲/辩论 20min</div><div class="tdesc">看TED/辩论视频 或 即兴英文演讲（每周2-3次）</div></div></div>
     <div class="tb"><div class="tl">20:00</div><div class="td" style="background:#a29bfe"></div><div class="tc"><div class="tt">🎹 钢琴 30min</div></div></div>
     <div class="tb"><div class="tl">21:00</div><div class="td" style="background:#0984e3"></div><div class="tc"><div class="tt">📖 睡前阅读</div></div></div>
   </div>
+  <div class="scard"><h3>💡 提醒</h3><div style="font-size:12px;color:var(--dim);line-height:1.6">• 每天5h有效学习 + 运动 + 放松<br>• <b style="color:var(--accent)">词汇书每天1 Chapter</b>雷打不动<br>• <b style="color:#06b6d4">运动是刚需</b>不是可选——大脑需要氧气🧠<br>• 演讲辩论<b style="color:#f472b6">每周2-3次</b>，不用每天<br>• 周末至少一天完全放松🎢<br>• 数学<b style="color:var(--red)">写完整英文步骤</b></div></div>
 </div>
 <div class="sec" id="secSongs"><div id="songList"></div></div>
 <div class="sec" id="secFilms"><div id="filmList"></div></div>
@@ -240,33 +243,33 @@ body{font-family:'Nunito',-apple-system,BlinkMacSystemFont,sans-serif;background
 <script>
 const S=new Date(2026,3,20),E=new Date(2026,7,10);
 const TV=[{s:new Date(2026,4,3),e:new Date(2026,4,7),f:'🇯🇵',n:'北海道'},{s:new Date(2026,5,18),e:new Date(2026,6,18),f:'🇺🇸',n:'圆石滩'}];
-const SM={math:{l:'数学',c:'#e17055'},eng:{l:'英语',c:'#0984e3'},sci:{l:'理化',c:'#00b894'},piano:{l:'钢琴',c:'#a29bfe'},vlog:{l:'Vlog',c:'#fd79a8'},act:{l:'活动',c:'#fdcb6e'}};
+const SM={math:{l:'数学',c:'#e17055'},eng:{l:'英语',c:'#0984e3'},sci:{l:'理化',c:'#00b894'},piano:{l:'钢琴',c:'#a29bfe'},vlog:{l:'Vlog',c:'#fd79a8'},act:{l:'活动',c:'#fdcb6e'},sport:{l:'运动',c:'#06b6d4'},speech:{l:'演讲',c:'#f472b6'}};
 function tv(d){for(const t of TV)if(d>=t.s&&d<=t.e)return t;return null;}
 function wn(d){const diff=(d-S)/864e5;if(diff<0)return 0;return Math.min(16,Math.floor(diff/7)+1);}
 function dow(d){const w=d.getDay();return w===0?7:w;}
 function ds(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 
-const DR=[{s:'math',t:'🔢 数学学习+练习 90min',k:1},{s:'eng',t:'📖 词汇书 1 Chapter',k:1},{s:'eng',t:'🇬🇧 英语阅读/精听 30min'},{s:'eng',t:'🎵 英语歌精听/跟唱 30min'},{s:'eng',t:'📖 英文书阅读 30min'}];
-const TR=[{s:'eng',t:'📖 词汇书 1 Chapter（碎片时间）',k:1},{s:'eng',t:'✍️ 英文旅行日记 3-5句'}];
-const UR=[{s:'eng',t:'📖 词汇书 1 Chapter',k:1},{s:'eng',t:'✍️ 英文旅行日记'},{s:'eng',t:'🗣️ 英文对话至少1次'}];
-const WR=[{s:'eng',t:'📖 词汇书 1 Chapter',k:1},{s:'eng',t:'📖 轻松阅读英文书 30min'}];
+const DR=[{s:'math',t:'🔢 数学学习+练习 90min',k:1},{s:'eng',t:'📖 词汇书 1 Chapter',k:1},{s:'eng',t:'🇬🇧 英语阅读/精听 30min'},{s:'eng',t:'🎵 英语歌精听/跟唱 30min'},{s:'eng',t:'📖 英文书阅读 30min'},{s:'sport',t:'🏃 运动30min（慢跑/健身/跑步机/游泳）'}];
+const TR=[{s:'eng',t:'📖 词汇书 1 Chapter（碎片时间）',k:1},{s:'eng',t:'✍️ 英文旅行日记 3-5句'},{s:'sport',t:'🚶 步行/徒步探索（旅行本身就是运动！）'}];
+const UR=[{s:'eng',t:'📖 词汇书 1 Chapter',k:1},{s:'eng',t:'✍️ 英文旅行日记'},{s:'eng',t:'🗣️ 英文对话至少1次'},{s:'sport',t:'🏄 运动：海边跑步/冲浪/徒步/健身房'}];
+const WR=[{s:'eng',t:'📖 词汇书 1 Chapter',k:1},{s:'eng',t:'📖 轻松阅读英文书 30min'},{s:'sport',t:'🏃 运动45min（周末加量！跑步/球类/游泳）'}];
 
-const WS={1:[{d:1,s:'math',t:'购买/下载 IGCSE 0580 教材',k:1},{d:1,s:'math',t:'注册 Save My Exams + Dr. Frost'},{d:2,s:'math',t:'做一套IGCSE数学诊断卷',k:1},{d:3,s:'math',t:'建立错题本'},{d:3,s:'eng',t:'下载 Magoosh APP'},{d:4,s:'math',t:'学习 Number 模块'},{d:4,s:'eng',t:'选3首英文歌精听 🎵'},{d:5,s:'eng',t:'选第一本书 The Alchemist'},{d:5,s:'sci',t:'🔬 看 Veritasium / Mark Rober'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #1「暑假第一天」'},{d:7,s:'vlog',t:'🎬 注册账号，确定定位'}],
-2:[{d:1,s:'math',t:'HCF/LCM + Standard Form',k:1},{d:2,s:'math',t:'有效数字 + 比例 + 利率'},{d:3,s:'math',t:'10道 Number 练习题 + 背术语'},{d:4,s:'eng',t:'🎬 看一部英文电影'},{d:5,s:'sci',t:'🔬 TED-Ed 过山车物理学'},{d:5,s:'math',t:'10道 Number 练习题'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #2「我的学习角」'},{d:7,s:'math',t:'Number 模块小测（计时）',k:1},{d:7,s:'eng',t:'学会完整唱1首英文歌 🎵'}],
+const WS={1:[{d:1,s:'math',t:'购买/下载 IGCSE 0580 教材',k:1},{d:1,s:'math',t:'注册 Save My Exams + Dr. Frost'},{d:2,s:'math',t:'做一套IGCSE数学诊断卷',k:1},{d:3,s:'math',t:'建立错题本'},{d:3,s:'eng',t:'下载 Magoosh APP'},{d:4,s:'math',t:'学习 Number 模块'},{d:4,s:'eng',t:'选3首英文歌精听 🎵'},{d:5,s:'eng',t:'选第一本书 The Alchemist'},{d:5,s:'sci',t:'🔬 看 Veritasium / Mark Rober'},{d:5,s:'speech',t:'🎤 看TED演讲：Do Schools Kill Creativity（Ken Robinson）'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #1「暑假第一天」'},{d:7,s:'vlog',t:'🎬 注册账号，确定定位'},{d:7,s:'sport',t:'🏃 跑步3km 测试基础体能'}],
+2:[{d:1,s:'math',t:'HCF/LCM + Standard Form',k:1},{d:2,s:'math',t:'有效数字 + 比例 + 利率'},{d:3,s:'math',t:'10道 Number 练习题 + 背术语'},{d:3,s:'speech',t:'🎤 看辩论视频：Oxford Union 精彩辩论集锦'},{d:4,s:'eng',t:'🎬 看一部英文电影'},{d:5,s:'sci',t:'🔬 TED-Ed 过山车物理学'},{d:5,s:'math',t:'10道 Number 练习题'},{d:5,s:'speech',t:'🗣️ 对镜练习1min英文自我介绍'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #2「我的学习角」'},{d:7,s:'math',t:'Number 模块小测（计时）',k:1},{d:7,s:'eng',t:'学会完整唱1首英文歌 🎵'}],
 3:[{d:1,s:'math',t:'展开括号 Expanding Brackets',k:1},{d:2,s:'math',t:'化简代数式'},{d:3,s:'math',t:'因式分解——提公因式法',k:1},{d:3,s:'eng',t:'第一本书读完+写读后感'},{d:4,s:'act',t:'🇯🇵 北海道出发！✈️'},{d:5,s:'act',t:'🇯🇵 拍照+英文日记'},{d:6,s:'vlog',t:'📹 Vlog #3「北海道🇯🇵」'},{d:7,s:'act',t:'头脑风暴活动方向'}],
-4:[{d:1,s:'act',t:'整理旅行照片+英文游记'},{d:2,s:'math',t:'一元一次/二次方程',k:1},{d:3,s:'math',t:'联立方程',k:1},{d:4,s:'eng',t:'启动 Tuesdays with Morrie'},{d:5,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #4「北海道回忆」'}],
-5:[{d:1,s:'math',t:'不等式 Inequalities',k:1},{d:2,s:'math',t:'数列 nth term'},{d:3,s:'math',t:'代数分式'},{d:4,s:'math',t:'15道 Algebra 练习'},{d:5,s:'math',t:'15道 Algebra 练习'},{d:5,s:'sci',t:'💰 Crash Course Economics #1'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #5「挑战英语歌」'},{d:7,s:'act',t:'确定暑期项目方向'},{d:7,s:'eng',t:'学会第二首英文歌 🎵'}],
-6:[{d:1,s:'math',t:'角度+三角形+四边形'},{d:2,s:'math',t:'圆的性质 Circle Theorems',k:1},{d:3,s:'math',t:'面积与体积'},{d:3,s:'eng',t:'第二本书完成'},{d:4,s:'eng',t:'🎬 看英文电影'},{d:4,s:'sci',t:'🌍 Geography Now'},{d:5,s:'sci',t:'💻 Scratch 编程 30min'},{d:5,s:'act',t:'活动项目：发布第一篇🚀',k:1},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #6「过山车物理🎢」'}],
-7:[{d:1,s:'math',t:'坐标几何 y=mx+c',k:1},{d:2,s:'math',t:'IGCSE模拟卷（计时！）',k:1},{d:3,s:'math',t:'对比诊断卷记录进步📈'},{d:4,s:'sci',t:'🔬 SmarterEveryDay'},{d:5,s:'act',t:'活动项目更新'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #7「7周进步」'},{d:7,s:'act',t:'🎢 奖励！去坐过山车！'}],
-8:[{d:1,s:'math',t:'SOH CAH TOA + 正弦余弦',k:1},{d:2,s:'math',t:'函数 f(x)'},{d:3,s:'eng',t:'做TPO阅读',k:1},{d:3,s:'eng',t:'启动 Educated'},{d:4,s:'sci',t:'物理：Forces & Motion'},{d:4,s:'eng',t:'🎬 看英文电影'},{d:5,s:'sci',t:'🧪 NileRed 趣味化学'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #8「我的一天」'},{d:7,s:'act',t:'活动项目更新'}],
-9:[{d:1,s:'math',t:'统计：平均数/中位数/直方图'},{d:2,s:'math',t:'概率+树状图'},{d:3,s:'eng',t:'TPO听力精听'},{d:3,s:'sci',t:'物理：Energy'},{d:4,s:'sci',t:'化学术语'},{d:5,s:'act',t:'🇺🇸 准备美国旅行',k:1},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #9「打包🇺🇸」'}],
+4:[{d:1,s:'act',t:'整理旅行照片+英文游记'},{d:2,s:'math',t:'一元一次/二次方程',k:1},{d:3,s:'math',t:'联立方程',k:1},{d:3,s:'speech',t:'🎤 看TED：The Power of Introverts（Susan Cain）'},{d:4,s:'eng',t:'启动 Tuesdays with Morrie'},{d:5,s:'piano',t:'🎹 钢琴练习 30min'},{d:5,s:'speech',t:'🗣️ 读一段英文书大声朗读+录音回听'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #4「北海道回忆」'}],
+5:[{d:1,s:'math',t:'不等式 Inequalities',k:1},{d:2,s:'math',t:'数列 nth term'},{d:3,s:'math',t:'代数分式'},{d:3,s:'speech',t:'🎤 看TED：How to Speak so People Listen（Julian Treasure）'},{d:4,s:'math',t:'15道 Algebra 练习'},{d:5,s:'math',t:'15道 Algebra 练习'},{d:5,s:'sci',t:'💰 Crash Course Economics #1'},{d:5,s:'speech',t:'🗣️ 选一个话题即兴英文演讲2min（录音）'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #5「挑战英语歌」'},{d:7,s:'act',t:'确定暑期项目方向'},{d:7,s:'eng',t:'学会第二首英文歌 🎵'}],
+6:[{d:1,s:'math',t:'角度+三角形+四边形'},{d:2,s:'math',t:'圆的性质 Circle Theorems',k:1},{d:2,s:'speech',t:'🎤 看辩论：Intelligence Squared 一场完整辩论'},{d:3,s:'math',t:'面积与体积'},{d:3,s:'eng',t:'第二本书完成'},{d:4,s:'eng',t:'🎬 看英文电影'},{d:4,s:'sci',t:'🌍 Geography Now'},{d:5,s:'sci',t:'💻 Scratch 编程 30min'},{d:5,s:'act',t:'活动项目：发布第一篇🚀',k:1},{d:5,s:'speech',t:'🗣️ 练习：用英文总结今天学到的数学概念（2min）'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #6「过山车物理🎢」'}],
+7:[{d:1,s:'math',t:'坐标几何 y=mx+c',k:1},{d:2,s:'math',t:'IGCSE模拟卷（计时！）',k:1},{d:2,s:'speech',t:'🎤 看TED：Your Body Language May Shape Who You Are（Amy Cuddy）'},{d:3,s:'math',t:'对比诊断卷记录进步📈'},{d:4,s:'sci',t:'🔬 SmarterEveryDay'},{d:5,s:'act',t:'活动项目更新'},{d:5,s:'speech',t:'🗣️ 模拟面试：英文回答Why do you want to study at SCIE?'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #7「7周进步」'},{d:7,s:'act',t:'🎢 奖励！去坐过山车！'}],
+8:[{d:1,s:'math',t:'SOH CAH TOA + 正弦余弦',k:1},{d:2,s:'math',t:'函数 f(x)'},{d:3,s:'eng',t:'做TPO阅读',k:1},{d:3,s:'eng',t:'启动 Educated'},{d:3,s:'speech',t:'🎤 看Harvard辩论队比赛视频（YouTube）'},{d:4,s:'sci',t:'物理：Forces & Motion'},{d:4,s:'eng',t:'🎬 看英文电影'},{d:5,s:'sci',t:'🧪 NileRed 趣味化学'},{d:5,s:'speech',t:'🗣️ 即兴辩论练习：Should students have homework?（正反各2min）'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #8「我的一天」'},{d:7,s:'act',t:'活动项目更新'}],
+9:[{d:1,s:'math',t:'统计：平均数/中位数/直方图'},{d:2,s:'math',t:'概率+树状图'},{d:3,s:'eng',t:'TPO听力精听'},{d:3,s:'sci',t:'物理：Energy'},{d:3,s:'speech',t:'🎤 看TED：The Danger of a Single Story（Chimamanda Adichie）'},{d:4,s:'sci',t:'化学术语'},{d:5,s:'act',t:'🇺🇸 准备美国旅行',k:1},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #9「打包🇺🇸」'}],
 10:[{d:1,s:'math',t:'全模块错题复盘',k:1},{d:1,s:'eng',t:'TOEFL口语 Task 1'},{d:2,s:'eng',t:'第三本书完成'},{d:3,s:'act',t:'🇺🇸 出发！✈️'},{d:5,s:'eng',t:'全英沉浸！主动交流'},{d:6,s:'vlog',t:'📹 Vlog #10「落地加州」'}],
-11:[{d:4,s:'eng',t:'逛当地书店买英文书📚'},{d:6,s:'vlog',t:'📹 Vlog #11「美式生活」'}],
-12:[{d:3,s:'eng',t:'🎵 精听一首在美国听到的歌'},{d:6,s:'vlog',t:'📹 Vlog #12「🎆独立日」'}],
-13:[{d:2,s:'eng',t:'口语：英文描述一天（录音）'},{d:4,s:'eng',t:'写最难忘经历200字+',k:1},{d:6,s:'vlog',t:'📹 Vlog #13「一个月总结」'},{d:7,s:'act',t:'思考文书素材💡'}],
-14:[{d:1,s:'act',t:'整理旅行日记选5篇',k:1},{d:2,s:'act',t:'研究G1选课规则',k:1},{d:3,s:'math',t:'回国做真题恢复',k:1},{d:4,s:'eng',t:'整理地道表达'},{d:5,s:'act',t:'确定选课方向'},{d:6,s:'piano',t:'🎹 恢复练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #14「回国感受」'}],
-15:[{d:1,s:'math',t:'纯英文做IGCSE题',k:1},{d:2,s:'math',t:'全模块最终测评',k:1},{d:3,s:'eng',t:'TPO完整模考',k:1},{d:3,s:'eng',t:'启动 The Great Gatsby'},{d:4,s:'sci',t:'物理：Waves + Cognito'},{d:5,s:'sci',t:'EconplusDal经济学'},{d:5,s:'act',t:'看学长分享+列社团清单'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #15「冲刺模式」'}],
-16:[{d:1,s:'act',t:'住宿准备🧳'},{d:2,s:'act',t:'了解宿舍规则'},{d:2,s:'eng',t:'英文自我介绍'},{d:3,s:'math',t:'最终数学测评'},{d:4,s:'act',t:'整理笔记和错题本'},{d:5,s:'act',t:'写暑期总结'},{d:6,s:'piano',t:'🎹 录一首完整曲目'},{d:6,s:'vlog',t:'📹 Vlog #16「暑假完结」'},{d:7,s:'act',t:'🎢 放松+开学！🎉'}]};
+11:[{d:3,s:'speech',t:'🗣️ 在美国找机会和人辩论一个话题（用英文！）'},{d:4,s:'eng',t:'逛当地书店买英文书📚'},{d:6,s:'vlog',t:'📹 Vlog #11「美式生活」'}],
+12:[{d:3,s:'eng',t:'🎵 精听一首在美国听到的歌'},{d:5,s:'speech',t:'🎤 看YouTube：Toastmasters Best Speeches 2025'},{d:6,s:'vlog',t:'📹 Vlog #12「🎆独立日」'}],
+13:[{d:2,s:'eng',t:'口语：英文描述一天（录音）'},{d:4,s:'eng',t:'写最难忘经历200字+',k:1},{d:5,s:'speech',t:'🗣️ 用英文给家人做一次5min旅行分享（像TED一样）'},{d:6,s:'vlog',t:'📹 Vlog #13「一个月总结」'},{d:7,s:'act',t:'思考文书素材💡'}],
+14:[{d:1,s:'act',t:'整理旅行日记选5篇',k:1},{d:2,s:'act',t:'研究G1选课规则',k:1},{d:2,s:'speech',t:'🎤 看TED：Grit（Angela Duckworth）——坚毅的力量'},{d:3,s:'math',t:'回国做真题恢复',k:1},{d:4,s:'eng',t:'整理地道表达'},{d:4,s:'speech',t:'🗣️ 练习英文演讲3min：My Summer in America'},{d:5,s:'act',t:'确定选课方向'},{d:6,s:'piano',t:'🎹 恢复练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #14「回国感受」'},{d:7,s:'sport',t:'🏋️ 恢复运动：健身房撸铁or跑步5km'}],
+15:[{d:1,s:'math',t:'纯英文做IGCSE题',k:1},{d:2,s:'math',t:'全模块最终测评',k:1},{d:2,s:'speech',t:'🎤 看Oxford Union完整辩论赛'},{d:3,s:'eng',t:'TPO完整模考',k:1},{d:3,s:'eng',t:'启动 The Great Gatsby'},{d:4,s:'sci',t:'物理：Waves + Cognito'},{d:4,s:'speech',t:'🗣️ 模拟辩论：Technology does more harm than good（准备正反方）'},{d:5,s:'sci',t:'EconplusDal经济学'},{d:5,s:'act',t:'看学长分享+列社团清单'},{d:6,s:'piano',t:'🎹 钢琴练习 30min'},{d:6,s:'vlog',t:'📹 Vlog #15「冲刺模式」'}],
+16:[{d:1,s:'act',t:'住宿准备🧳'},{d:2,s:'act',t:'了解宿舍规则'},{d:2,s:'eng',t:'英文自我介绍'},{d:2,s:'speech',t:'🗣️ 准备一段3min英文开学自我介绍（录视频）',k:1},{d:3,s:'math',t:'最终数学测评'},{d:4,s:'act',t:'整理笔记和错题本'},{d:5,s:'act',t:'写暑期总结'},{d:6,s:'piano',t:'🎹 录一首完整曲目'},{d:6,s:'vlog',t:'📹 Vlog #16「暑假完结」'},{d:7,s:'act',t:'🎢 放松+开学！🎉'}]};
 
 function tasks(d){const w=wn(d);if(w<1||w>16)return[];const dw=dow(d),t=tv(d),we=dw>=6,r=[];
   if(t){(t.n==='圆石滩'?UR:TR).forEach(x=>r.push({...x,dy:1}));if(t.n==='圆石滩'&&w>=11&&w<=13)r.push({s:'math',t:'轻量数学3道题',dy:1});}
