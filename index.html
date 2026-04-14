@@ -33,7 +33,7 @@
     -webkit-tap-highlight-color: transparent;
     background-image: 
       radial-gradient(ellipse at 20% 0%, rgba(100,180,255,0.3) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(140,200,255,0.2) 0%, transparent 50%), linear-gradient(180deg, #c8dbe8 0%, #d4e3ed 30%, #dfeaf1 60%, #e8f0f5 80%, #f0f4f7 100%);
-    background-attachment: fixed;
+    background-attachment: fixed; background-size: cover;
   }
 
   /* Header */
@@ -103,14 +103,13 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
-    padding: 16px 16px 8px;
+    padding: 12px 16px 6px;
     max-width: 600px;
     margin: 0 auto;
   }
   .stat-card {
     background: var(--card);
     
-    -webkit-
     border-radius: 14px;
     padding: 12px 8px;
     text-align: center;
@@ -133,14 +132,13 @@
 
   /* Progress Ring */
   .progress-section {
-    padding: 16px;
+    padding: 10px 16px;
     max-width: 600px;
     margin: 0 auto;
   }
   .progress-container {
     background: var(--card);
     
-    -webkit-
     border-radius: var(--radius);
     padding: 20px;
     display: flex;
@@ -207,8 +205,8 @@
   /* Navigation Tabs */
   .nav-tabs {
     display: flex;
-    gap: 6px;
-    padding: 8px 16px;
+    gap: 5px;
+    padding: 6px 16px;
     max-width: 600px;
     margin: 0 auto;
     overflow-x: auto;
@@ -223,7 +221,6 @@
     font-weight: 600;
     background: rgba(255,252,245,0.85);
     
-    -webkit-
     color: var(--text-dim);
     border: 1px solid rgba(180,160,130,0.2);
     cursor: pointer;
@@ -239,7 +236,7 @@
 
   /* Phase sections */
   .phase-content {
-    padding: 8px 16px 100px;
+    padding: 6px 16px 80px;
     max-width: 600px;
     margin: 0 auto;
   }
@@ -247,16 +244,15 @@
   .week-card {
     background: var(--card);
     
-    -webkit-
     border-radius: var(--radius);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     border: 1px solid var(--border);
     overflow: hidden;
     transition: all 0.25s ease;
     box-shadow: 0 2px 8px rgba(140,120,90,0.08), 0 1px 2px rgba(140,120,90,0.06);
   }
   .week-card.expanded {
-    background: rgba(255,255,255,0.55);
+    background: linear-gradient(145deg, rgba(255,253,248,0.92) 0%, rgba(248,244,235,0.88) 100%);
     border-color: rgba(74,128,196,0.25);
     box-shadow: 0 4px 16px rgba(140,120,90,0.12), 0 1px 3px rgba(140,120,90,0.08);
   }
@@ -329,7 +325,7 @@
   .subject-label {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     margin: 12px 0 8px;
     font-size: 11px;
     font-weight: 700;
@@ -413,7 +409,7 @@
 
   /* Daily Schedule */
   .daily-section {
-    padding: 8px 16px 100px;
+    padding: 6px 16px 80px;
     max-width: 600px;
     margin: 0 auto;
     display: none;
@@ -423,20 +419,19 @@
   .schedule-card {
     background: var(--card);
     
-    -webkit-
     border-radius: var(--radius);
-    padding: 16px;
-    margin-bottom: 12px;
+    padding: 10px 16px;
+    margin-bottom: 10px;
     border: 1px solid var(--border);
     box-shadow: 0 2px 8px rgba(140,120,90,0.08), 0 1px 2px rgba(140,120,90,0.06);
   }
   .schedule-card h3 {
     font-size: 14px;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
   }
   .time-block {
     display: flex;
@@ -531,7 +526,7 @@
 
   /* Reset button */
   .reset-section {
-    padding: 16px;
+    padding: 10px 16px;
     max-width: 600px;
     margin: 0 auto;
     text-align: center;
@@ -550,12 +545,16 @@
   /* Motivational quote */
   .quote-bar {
     text-align: center;
-    padding: 12px 20px;
+    padding: 8px 24px;
     font-size: 12px;
-    color: var(--text-dim);
+    color: #8a9bb0;
     font-style: italic;
     max-width: 600px;
     margin: 0 auto;
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+    border-top: 1px solid rgba(180,160,130,0.1);
+    border-bottom: 1px solid rgba(180,160,130,0.1);
   }
 
   /* Confetti */
