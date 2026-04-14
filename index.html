@@ -38,93 +38,104 @@
 
   /* Header */
   .header {
-    background: linear-gradient(180deg, #4db8e8 0%, #7ecbf1 40%, #a8dcf5 70%, #d0eefb 100%);
-    padding: 24px 20px 80px;
+    background: linear-gradient(180deg, #2a9bd6 0%, #4db8e8 20%, #6dc8f0 40%, #8dd6f5 60%, #add8f0 80%, #c8e8f6 100%);
+    padding: 28px 20px 0;
     text-align: center;
     position: relative;
     overflow: hidden;
+    min-height: 260px;
   }
-  /* Clouds */
+  /* Clouds — bigger, more layered */
   .header::before {
     content: '';
     position: absolute;
-    top: 15px;
+    top: 0;
     left: -10%;
     width: 120%;
     height: 100%;
     background: 
-      radial-gradient(ellipse 80px 40px at 15% 20%, rgba(255,255,255,0.7) 0%, transparent 70%),
-      radial-gradient(ellipse 100px 45px at 18% 22%, rgba(255,255,255,0.5) 0%, transparent 70%),
-      radial-gradient(ellipse 60px 30px at 75% 15%, rgba(255,255,255,0.6) 0%, transparent 70%),
-      radial-gradient(ellipse 90px 40px at 78% 18%, rgba(255,255,255,0.4) 0%, transparent 70%),
-      radial-gradient(ellipse 50px 25px at 45% 10%, rgba(255,255,255,0.5) 0%, transparent 70%),
-      radial-gradient(ellipse 70px 35px at 90% 30%, rgba(255,255,255,0.4) 0%, transparent 70%);
-    animation: cloudDrift 20s ease-in-out infinite;
+      radial-gradient(ellipse 120px 50px at 8% 15%, rgba(255,255,255,0.65) 0%, transparent 70%),
+      radial-gradient(ellipse 160px 55px at 12% 18%, rgba(255,255,255,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 80px 35px at 35% 8%, rgba(255,255,255,0.45) 0%, transparent 70%),
+      radial-gradient(ellipse 100px 40px at 65% 12%, rgba(255,255,255,0.55) 0%, transparent 70%),
+      radial-gradient(ellipse 140px 50px at 68% 15%, rgba(255,255,255,0.3) 0%, transparent 70%),
+      radial-gradient(ellipse 70px 30px at 88% 22%, rgba(255,255,255,0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 90px 35px at 50% 5%, rgba(255,255,255,0.4) 0%, transparent 70%);
+    animation: cloudDrift 25s ease-in-out infinite;
     z-index: 0;
   }
   @keyframes cloudDrift {
     0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(3%); }
+    50% { transform: translateX(2.5%); }
   }
-  /* Fuji mountain */
+  /* Fuji mountain — much bigger and more detailed */
   .header::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 80px;
+    height: 140px;
     background: 
-      /* Snow cap */
-      linear-gradient(135deg, transparent 38%, #fff 38%, #fff 42%, transparent 42%),
-      linear-gradient(225deg, transparent 38%, #fff 38%, #fff 42%, transparent 42%),
-      /* Main mountain */
-      linear-gradient(135deg, transparent 30%, #7ba7c9 30%, #6b9abb 50%, #5a8dad 62%, transparent 62%),
-      linear-gradient(225deg, transparent 30%, #8bb5d1 30%, #7ba7c9 50%, #6b9abb 62%, transparent 62%),
-      /* Rolling hills */
-      radial-gradient(ellipse 200% 40px at 50% 100%, #90c695 0%, transparent 70%),
-      radial-gradient(ellipse 150% 30px at 30% 100%, #7ebb84 0%, transparent 60%),
-      radial-gradient(ellipse 150% 30px at 70% 100%, #85c28a 0%, transparent 60%);
+      /* Snow cap — wider */
+      linear-gradient(140deg, transparent 35%, #fff 35%, #f8fbff 38%, #fff 40%, transparent 40%),
+      linear-gradient(220deg, transparent 35%, #fff 35%, #f0f5fa 38%, #fff 40%, transparent 40%),
+      /* Mountain body — gradient shading */
+      linear-gradient(140deg, transparent 25%, #6a9fc4 25%, #5d92b8 35%, #5088ae 45%, #4a80a6 55%, transparent 60%),
+      linear-gradient(220deg, transparent 25%, #7aadd0 25%, #6da1c6 35%, #6097bc 45%, #5a8fb4 55%, transparent 60%),
+      /* Foothills left */
+      radial-gradient(ellipse 60% 50px at 15% 100%, #6aae72 0%, transparent 70%),
+      radial-gradient(ellipse 50% 35px at 8% 100%, #5da366 0%, transparent 65%),
+      /* Foothills right */
+      radial-gradient(ellipse 55% 45px at 85% 100%, #6aae72 0%, transparent 70%),
+      radial-gradient(ellipse 45% 30px at 92% 100%, #5da366 0%, transparent 65%),
+      /* Main green base */
+      radial-gradient(ellipse 250% 50px at 50% 100%, #78b880 0%, transparent 55%),
+      radial-gradient(ellipse 200% 35px at 40% 100%, #6aae72 0%, transparent 50%),
+      radial-gradient(ellipse 200% 35px at 60% 100%, #72b47a 0%, transparent 50%);
     z-index: 0;
   }
   .header h1 {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 800;
     position: relative;
     z-index: 2;
     color: #fff;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    text-shadow: 0 2px 16px rgba(0,0,0,0.12);
     -webkit-text-fill-color: #fff;
     background: none;
     -webkit-background-clip: unset;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
+    letter-spacing: -0.5px;
   }
   .header .subtitle {
     font-size: 13px;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.8);
     position: relative;
     z-index: 2;
+    font-weight: 500;
   }
   .header .date-range {
     display: inline-block;
-    margin-top: 12px;
-    padding: 6px 16px;
-    background: rgba(255,255,255,0.25);
-    border: 1px solid rgba(255,255,255,0.4);
-    border-radius: 20px;
-    font-size: 12px;
-    color: #fff;
+    margin-top: 6px;
+    padding: 3px 12px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 12px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
     position: relative;
     z-index: 2;
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
   }
-  /* Roller coaster SVG scene */
+  /* Roller coaster SVG scene — bigger, more prominent */
   .coaster-scene {
     position: absolute;
-    bottom: 18px;
+    bottom: 30px;
     left: 0;
     width: 100%;
-    height: 60px;
+    height: 100px;
     z-index: 1;
     overflow: visible;
   }
@@ -639,40 +650,59 @@
 <div class="header">
   <h1>🎓 Michael的小暑假</h1>
   <p class="subtitle">数学起飞 · 英语精进 · 快乐启航</p>
-  <div class="date-range">📅 2026.4.14 → 2026.8.10 · 共17周</div>
+  <div class="date-range">4.20 → 8.10 · 16周 · SCIE 2026</div>
   <!-- Roller coaster scene -->
-  <svg class="coaster-scene" viewBox="0 0 400 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Track -->
-    <path d="M-10,50 Q30,48 60,30 Q90,10 120,15 Q150,20 170,40 Q190,55 220,35 Q250,15 280,20 Q310,25 340,45 Q370,55 410,50" 
-      fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+  <svg class="coaster-scene" viewBox="0 0 400 100" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+    <!-- Track shadow -->
+    <path d="M-20,82 Q20,78 55,45 Q85,12 125,22 Q160,30 185,60 Q210,85 250,50 Q280,20 320,30 Q355,38 380,68 Q400,82 420,80" 
+      fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Track main -->
+    <path d="M-20,80 Q20,76 55,43 Q85,10 125,20 Q160,28 185,58 Q210,83 250,48 Q280,18 320,28 Q355,36 380,66 Q400,80 420,78" 
+      fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" stroke-linecap="round"/>
     <!-- Track supports -->
-    <line x1="60" y1="30" x2="60" y2="58" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
-    <line x1="120" y1="15" x2="120" y2="58" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
-    <line x1="170" y1="40" x2="170" y2="58" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
-    <line x1="220" y1="35" x2="220" y2="58" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
-    <line x1="280" y1="20" x2="280" y2="58" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
-    <line x1="340" y1="45" x2="340" y2="58" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
-    <!-- Cart with people -->
+    <line x1="55" y1="43" x2="55" y2="92" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <line x1="90" y1="15" x2="90" y2="92" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <line x1="125" y1="20" x2="125" y2="92" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <line x1="185" y1="58" x2="185" y2="92" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+    <line x1="250" y1="48" x2="250" y2="92" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <line x1="285" y1="22" x2="285" y2="92" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <line x1="320" y1="28" x2="320" y2="92" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <line x1="380" y1="66" x2="380" y2="92" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+    <!-- Cross braces -->
+    <line x1="83" y1="25" x2="97" y2="50" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <line x1="97" y1="25" x2="83" y2="50" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <line x1="278" y1="30" x2="292" y2="55" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <line x1="292" y1="30" x2="278" y2="55" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <!-- Cart with people (animated) -->
     <g>
-      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto"
-        path="M-10,50 Q30,48 60,30 Q90,10 120,15 Q150,20 170,40 Q190,55 220,35 Q250,15 280,20 Q310,25 340,45 Q370,55 410,50"/>
+      <animateMotion dur="10s" repeatCount="indefinite" rotate="auto"
+        path="M-20,80 Q20,76 55,43 Q85,10 125,20 Q160,28 185,58 Q210,83 250,48 Q280,18 320,28 Q355,36 380,66 Q400,80 420,78"/>
       <!-- Cart body -->
-      <rect x="-8" y="-10" width="16" height="8" rx="3" fill="rgba(255,255,255,0.8)"/>
-      <!-- Person 1 -->
-      <circle cx="-3" cy="-14" r="3" fill="rgba(255,255,255,0.9)"/>
-      <line x1="-5" y1="-12" x2="-1" y2="-12" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
+      <rect x="-10" y="-12" width="20" height="10" rx="4" fill="rgba(255,255,255,0.85)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
+      <!-- Wheels -->
+      <circle cx="-5" cy="-2" r="2" fill="rgba(255,255,255,0.6)"/>
+      <circle cx="5" cy="-2" r="2" fill="rgba(255,255,255,0.6)"/>
+      <!-- Person 1 — Michael! -->
+      <circle cx="-3" cy="-18" r="4" fill="rgba(255,255,255,0.9)"/>
+      <rect x="-6" y="-14" width="6" height="3" rx="1" fill="rgba(255,220,130,0.8)"/>
+      <!-- Hands up! excited! -->
+      <line x1="-6" y1="-19" x2="-10" y2="-28" stroke="rgba(255,220,130,0.8)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="0" y1="-19" x2="3" y2="-28" stroke="rgba(255,220,130,0.8)" stroke-width="1.5" stroke-linecap="round"/>
       <!-- Person 2 -->
-      <circle cx="4" cy="-14" r="3" fill="rgba(255,200,100,0.9)"/>
-      <!-- Hands up! -->
-      <line x1="3" y1="-16" x2="1" y2="-22" stroke="rgba(255,200,100,0.7)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="5" y1="-16" x2="7" y2="-22" stroke="rgba(255,200,100,0.7)" stroke-width="1" stroke-linecap="round"/>
+      <circle cx="5" cy="-18" r="4" fill="rgba(255,180,180,0.9)"/>
+      <rect x="2" y="-14" width="6" height="3" rx="1" fill="rgba(255,150,150,0.7)"/>
     </g>
     <!-- Birds -->
-    <g opacity="0.3">
-      <path d="M50,8 Q53,5 56,8" fill="none" stroke="white" stroke-width="1"/>
-      <path d="M300,12 Q303,9 306,12" fill="none" stroke="white" stroke-width="1"/>
-      <path d="M180,5 Q183,2 186,5" fill="none" stroke="white" stroke-width="1"/>
+    <g opacity="0.35">
+      <path d="M40,12 Q44,7 48,12" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M310,8 Q314,3 318,8" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M170,6 Q174,1 178,6" fill="none" stroke="white" stroke-width="1" stroke-linecap="round"/>
+      <path d="M230,14 Q233,10 236,14" fill="none" stroke="white" stroke-width="1" stroke-linecap="round"/>
+      <path d="M80,4 Q83,0 86,4" fill="none" stroke="white" stroke-width="0.8" stroke-linecap="round"/>
     </g>
+    <!-- Sun glow (subtle) -->
+    <circle cx="350" cy="8" r="12" fill="rgba(255,240,200,0.2)"/>
+    <circle cx="350" cy="8" r="6" fill="rgba(255,240,200,0.35)"/>
   </svg>
 </div>
 
@@ -847,7 +877,7 @@
 // ============ DATA ============
 const WEEKS = [
   {
-    num: 1, title: "启动周", date: "4.14 - 4.20", phase: 1,
+    num: 1, title: "启动周", date: "4.20 - 4.26", phase: 1,
     tasks: [
       { subj: "math", text: "购买/下载 Cambridge IGCSE Mathematics 0580 教材 <a href='https://gamatrain.com/paper/30712/Mathematics-Core-and-Extended-0580-Coursebook-Free-PDF' target='_blank' style='color:var(--accent);'>📥免费PDF</a> · <a href='https://search.jd.com/Search?keyword=Cambridge+IGCSE+Mathematics+0580' target='_blank' style='color:var(--red);'>🛒京东</a>", key: true },
       { subj: "math", text: "注册 <a href='https://www.savemyexams.com/igcse/maths/cie/25/revision-notes/' target='_blank' style='color:var(--accent);'>Save My Exams</a> + <a href='https://www.drfrost.org/' target='_blank' style='color:var(--accent);'>Dr. Frost Maths</a>（均免费）" },
@@ -863,7 +893,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 2, title: "Number 模块", date: "4.21 - 4.27", phase: 1,
+    num: 2, title: "Number 模块", date: "4.27 - 5.3", phase: 1,
     tasks: [
       { subj: "math", text: "HCF/LCM + Standard Form 学习与练习", key: true },
       { subj: "math", text: "有效数字 + 比例 + 利率计算" },
@@ -879,7 +909,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 3, title: "Algebra 上 + 🇯🇵北海道", date: "4.28 - 5.4", phase: 1,
+    num: 3, title: "🇯🇵北海道 + Algebra 上", date: "5.3 - 5.9", phase: 1,
     tasks: [
       { subj: "math", text: "展开括号（Expanding Brackets）", key: true },
       { subj: "math", text: "化简代数式（Simplifying）" },
@@ -893,7 +923,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 4, title: "🇯🇵北海道 + Algebra 下", date: "5.5 - 5.11", phase: 1,
+    num: 4, title: "Algebra 下", date: "5.10 - 5.16", phase: 1,
     tasks: [
       { subj: "act", text: "🇯🇵 北海道最后两天：享受旅行！放松为主", fun: true },
       { subj: "act", text: "整理旅行照片+写一篇英文游记（回来后）" },
@@ -906,7 +936,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 5, title: "Algebra 拓展", date: "5.12 - 5.18", phase: 1,
+    num: 5, title: "Algebra 拓展", date: "5.17 - 5.23", phase: 1,
     tasks: [
       { subj: "math", text: "不等式（Inequalities）解法与图示", key: true },
       { subj: "math", text: "数列 nth term 公式" },
@@ -920,7 +950,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 6, title: "Geometry", date: "5.19 - 5.25", phase: 1,
+    num: 6, title: "Geometry", date: "5.24 - 5.30", phase: 1,
     tasks: [
       { subj: "math", text: "角度关系 + 三角形 + 四边形" },
       { subj: "math", text: "圆的性质（Circle Theorems）", key: true },
@@ -934,7 +964,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 7, title: "Phase 1 收尾", date: "5.26 - 5.31", phase: 1,
+    num: 7, title: "Phase 1 收尾", date: "5.31 - 6.6", phase: 1,
     tasks: [
       { subj: "math", text: "坐标几何：直线方程 y=mx+c + 斜率", key: true },
       { subj: "math", text: "做一套 IGCSE 数学模拟卷（计时！）", key: true },
@@ -947,7 +977,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 8, title: "三角函数+函数", date: "6.1 - 6.7", phase: 2,
+    num: 8, title: "三角函数+函数", date: "6.7 - 6.13", phase: 2,
     tasks: [
       { subj: "math", text: "SOH CAH TOA + 正弦/余弦定理", key: true },
       { subj: "math", text: "函数 f(x) notation + 线性/二次函数" },
@@ -961,7 +991,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 9, title: "统计与概率 + 出发准备", date: "6.8 - 6.14", phase: 2,
+    num: 9, title: "统计概率 + 🇺🇸出发准备", date: "6.14 - 6.20", phase: 2,
     tasks: [
       { subj: "math", text: "平均数/中位数/众数 + 频率直方图" },
       { subj: "math", text: "概率计算 + 树状图" },
@@ -975,7 +1005,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 10, title: "🇺🇸 圆石滩·出发", date: "6.15 - 6.21", phase: 2,
+    num: 10, title: "🇺🇸 圆石滩·出发", date: "6.21 - 6.27", phase: 2,
     tasks: [
       { subj: "math", text: "出发前：数学全模块错题快速复盘", key: true },
       { subj: "eng", text: "TOEFL口语录音练习 Task 1（出发前完成）" },
@@ -987,7 +1017,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 11, title: "🇺🇸 圆石滩·Week 2", date: "6.22 - 6.28", phase: 2,
+    num: 11, title: "🇺🇸 圆石滩·Week 2", date: "6.28 - 7.4", phase: 2,
     tasks: [
       { subj: "eng", text: "每天用英文和当地人对话至少3次 🗣️", fun: true },
       { subj: "eng", text: "词汇书每天1 Chapter（碎片时间打卡）" },
@@ -998,7 +1028,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 12, title: "🇺🇸 圆石滩·Week 3", date: "6.29 - 7.5", phase: 2,
+    num: 12, title: "🇺🇸 圆石滩·Week 3", date: "7.5 - 7.11", phase: 2,
     tasks: [
       { subj: "eng", text: "全英文点餐/问路/购物——实战口语 🗣️", fun: true },
       { subj: "eng", text: "词汇书每天1 Chapter 坚持打卡" },
@@ -1009,7 +1039,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 13, title: "🇺🇸 圆石滩·Week 4", date: "7.6 - 7.12", phase: 2,
+    num: 13, title: "🇺🇸 圆石滩·Week 4", date: "7.12 - 7.18", phase: 2,
     tasks: [
       { subj: "eng", text: "口语挑战：用英文完整描述一天的行程（录音）" },
       { subj: "eng", text: "词汇书完成56章（旅途也坚持打卡！）" },
@@ -1020,7 +1050,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 14, title: "🇺🇸 回国·恢复节奏", date: "7.13 - 7.19", phase: 3,
+    num: 14, title: "🇺🇸 回国·恢复", date: "7.19 - 7.25", phase: 3,
     tasks: [
       { subj: "act", text: "🇺🇸 圆石滩最后几天，享受旅程！", fun: true },
       { subj: "act", text: "整理一个月的英文旅行日记，选最好的5篇", key: true },
@@ -1033,7 +1063,7 @@ const WEEKS = [
     ]
   },
   {
-    num: 15, title: "全英冲刺·恢复全速", date: "7.20 - 7.26", phase: 3,
+    num: 15, title: "全英冲刺", date: "7.26 - 8.1", phase: 3,
     tasks: [
       { subj: "math", text: "用纯英文做 IGCSE 数学题（模拟上课）", key: true },
       { subj: "math", text: "数学全模块最终测评", key: true },
@@ -1047,27 +1077,16 @@ const WEEKS = [
     ]
   },
   {
-    num: 16, title: "入学准备", date: "7.27 - 8.2", phase: 3,
+    num: 16, title: "出发！🎉", date: "8.2 - 8.10", phase: 3,
     tasks: [
       { subj: "act", text: "住宿物品准备清单 🧳" },
       { subj: "act", text: "了解宿舍规则和作息时间" },
       { subj: "eng", text: "写一篇英文自我介绍" },
       { subj: "math", text: "最后一次 IGCSE 数学全面测评" },
-      { subj: "eng", text: "词汇书完成70章+" },
-      { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
-      { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
-      { subj: "vlog", text: "📹 Vlog #16「开箱宿舍装备」360°拍打包行李+开学必备好物", fun: true },
-    ]
-  },
-  {
-    num: 17, title: "出发！", date: "8.3 - 8.10", phase: 3,
-    tasks: [
       { subj: "act", text: "整理暑期学习笔记和错题本" },
-      { subj: "act", text: "回顾暑期活动项目成果" },
       { subj: "act", text: "写一篇暑期总结（给自己看）" },
-      { subj: "act", text: "准备好开学物品 ✅" },
       { subj: "piano", text: "🎹 弹一首完整曲目录视频——记录暑期成果", fun: true },
-      { subj: "vlog", text: "📹 Vlog #17「暑假完结篇」17周回顾混剪+写给深国交的自己", fun: true },
+      { subj: "vlog", text: "📹 Vlog #16「暑假完结篇」16周回顾混剪+写给深国交的自己", fun: true },
       { subj: "act", text: "🎢 放松一天！去游乐园/什么都不做！", fun: true },
       { subj: "act", text: "带着好心情开学！🎉", fun: true },
     ]
@@ -1236,8 +1255,8 @@ function renderStats() {
   
   // Current week based on date
   const now = new Date();
-  const start = new Date(2026, 3, 14); // April 14
-  const weekIdx = Math.max(1, Math.min(17, Math.ceil((now - start) / (7 * 24 * 60 * 60 * 1000))));
+  const start = new Date(2026, 3, 20); // April 14
+  const weekIdx = Math.max(1, Math.min(16, Math.ceil((now - start) / (7 * 24 * 60 * 60 * 1000))));
   document.getElementById('statWeek').textContent = `W${weekIdx}`;
 }
 
@@ -1491,8 +1510,8 @@ render();
 
 // Auto-expand current week
 const now = new Date();
-const start = new Date(2026, 3, 14);
-const currentWeek = Math.max(1, Math.min(17, Math.ceil((now - start) / (7 * 24 * 60 * 60 * 1000))));
+const start = new Date(2026, 3, 20);
+const currentWeek = Math.max(1, Math.min(16, Math.ceil((now - start) / (7 * 24 * 60 * 60 * 1000))));
 setTimeout(() => {
   const el = document.getElementById(`week-${currentWeek}`);
   if (el) el.classList.add('expanded');
