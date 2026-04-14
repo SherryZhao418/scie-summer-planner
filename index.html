@@ -602,6 +602,59 @@
   .toast.show {
     transform: translateX(-50%) translateY(0);
   }
+
+  /* Emoji buttons */
+  .emoji-btn {
+    width: 40px; height: 40px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; cursor: pointer; user-select: none; -webkit-user-select: none;
+    background: rgba(255,255,255,0.35);
+    border: 1px solid rgba(255,255,255,0.5);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    transition: all 0.15s;
+    box-shadow: 0 2px 8px rgba(0,50,100,0.04);
+  }
+  .emoji-btn:active { transform: scale(0.85); }
+
+  /* Floating hearts */
+  .float-emoji {
+    position: fixed;
+    font-size: 28px;
+    pointer-events: none;
+    z-index: 999;
+    animation: floatUp 1.5s ease-out forwards;
+  }
+  @keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    50% { opacity: 0.8; transform: translateY(-60px) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-120px) scale(0.6); }
+  }
+
+  /* Message bubble */
+  .msg-bubble {
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 12px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.4;
+    box-shadow: 0 2px 8px rgba(0,50,100,0.03);
+  }
+  .msg-bubble .msg-name {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+  .msg-bubble .msg-time {
+    font-size: 9px;
+    color: var(--text-dim);
+    float: right;
+    margin-top: 2px;
+  }
 </style>
 </head>
 <body>
@@ -824,6 +877,68 @@
     </div>
   </div>
   <div id="filmsList"></div>
+</div>
+
+<!-- 加油互动区 -->
+<div style="padding:8px 16px;max-width:600px;margin:0 auto;" id="cheerSection">
+  <div class="schedule-card" style="text-align:center;padding:20px;">
+    <h3 style="font-size:16px;margin-bottom:4px;">💪 为 Michael 加油！</h3>
+    <p style="font-size:11px;color:var(--text-dim);margin-bottom:16px;">家长和朋友都可以点赞鼓励</p>
+    
+    <!-- Big like button -->
+    <div id="cheerBtn" onclick="sendCheer()" style="
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      width:120px;height:120px;border-radius:50%;
+      background:linear-gradient(135deg, rgba(239,68,68,0.08) 0%, rgba(239,68,68,0.15) 100%);
+      border:2px solid rgba(239,68,68,0.2);
+      cursor:pointer;user-select:none;-webkit-user-select:none;
+      transition:all 0.2s;flex-direction:column;
+      box-shadow:0 4px 20px rgba(239,68,68,0.1);
+    ">
+      <span style="font-size:40px;line-height:1;" id="cheerEmoji">❤️</span>
+      <span style="font-size:22px;font-weight:800;color:#dc2626;" id="cheerCount">0</span>
+    </div>
+    
+    <p style="font-size:10px;color:var(--text-dim);margin-top:8px;">点击爱心为Michael打气</p>
+
+    <!-- Quick emoji reactions -->
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:16px;flex-wrap:wrap;">
+      <div class="emoji-btn" onclick="sendEmoji('💪')">💪</div>
+      <div class="emoji-btn" onclick="sendEmoji('🔥')">🔥</div>
+      <div class="emoji-btn" onclick="sendEmoji('⭐')">⭐</div>
+      <div class="emoji-btn" onclick="sendEmoji('🎉')">🎉</div>
+      <div class="emoji-btn" onclick="sendEmoji('🎢')">🎢</div>
+      <div class="emoji-btn" onclick="sendEmoji('🎵')">🎵</div>
+      <div class="emoji-btn" onclick="sendEmoji('🎹')">🎹</div>
+      <div class="emoji-btn" onclick="sendEmoji('📚')">📚</div>
+    </div>
+
+    <!-- Emoji stream -->
+    <div id="emojiStream" style="
+      display:flex;flex-wrap:wrap;justify-content:center;gap:4px;
+      margin-top:12px;min-height:30px;
+      font-size:18px;transition:all 0.3s;
+    "></div>
+
+    <!-- Leave a message -->
+    <div style="margin-top:16px;">
+      <div style="display:flex;gap:6px;">
+        <input id="cheerMsg" type="text" placeholder="写一句鼓励的话..." maxlength="50" style="
+          flex:1;padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.55);
+          background:rgba(255,255,255,0.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+          font-size:12px;color:var(--text);outline:none;font-family:inherit;
+        "/>
+        <button onclick="sendMessage()" style="
+          padding:8px 14px;border-radius:12px;border:none;
+          background:rgba(37,99,235,0.85);color:#fff;font-size:12px;font-weight:600;
+          cursor:pointer;font-family:inherit;white-space:nowrap;
+        ">发送</button>
+      </div>
+    </div>
+
+    <!-- Messages wall -->
+    <div id="msgWall" style="margin-top:12px;max-height:200px;overflow-y:auto;"></div>
+  </div>
 </div>
 
 <div class="reset-section">
@@ -1464,9 +1579,116 @@ function resetAll() {
   }
 }
 
+// ============ CHEER SYSTEM ============
+function loadCheerData() {
+  try {
+    const d = localStorage.getItem('scie-cheer-v1');
+    return d ? JSON.parse(d) : { count: 0, emojis: [], messages: [] };
+  } catch { return { count: 0, emojis: [], messages: [] }; }
+}
+
+function saveCheerData(data) {
+  localStorage.setItem('scie-cheer-v1', JSON.stringify(data));
+}
+
+function renderCheerData() {
+  const data = loadCheerData();
+  document.getElementById('cheerCount').textContent = data.count;
+  
+  // Render emoji stream (last 30)
+  const stream = document.getElementById('emojiStream');
+  const recent = (data.emojis || []).slice(-30);
+  stream.innerHTML = recent.map(e => `<span style="font-size:16px;">${e}</span>`).join('');
+  
+  // Render messages (last 20)
+  const wall = document.getElementById('msgWall');
+  const msgs = (data.messages || []).slice(-20).reverse();
+  wall.innerHTML = msgs.map(m => `
+    <div class="msg-bubble">
+      <div class="msg-name">${escapeHtml(m.name)}<span class="msg-time">${m.time}</span></div>
+      ${escapeHtml(m.text)}
+    </div>
+  `).join('');
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function sendCheer() {
+  const data = loadCheerData();
+  data.count = (data.count || 0) + 1;
+  data.emojis = data.emojis || [];
+  data.emojis.push('❤️');
+  saveCheerData(data);
+  renderCheerData();
+  
+  // Animate the button
+  const btn = document.getElementById('cheerBtn');
+  btn.style.transform = 'scale(1.15)';
+  setTimeout(() => btn.style.transform = 'scale(1)', 200);
+  
+  // Float a heart
+  floatEmoji('❤️');
+  
+  // Haptic
+  if (navigator.vibrate) navigator.vibrate(30);
+}
+
+function sendEmoji(emoji) {
+  const data = loadCheerData();
+  data.count = (data.count || 0) + 1;
+  data.emojis = data.emojis || [];
+  data.emojis.push(emoji);
+  saveCheerData(data);
+  renderCheerData();
+  floatEmoji(emoji);
+  if (navigator.vibrate) navigator.vibrate(20);
+}
+
+function floatEmoji(emoji) {
+  const el = document.createElement('div');
+  el.className = 'float-emoji';
+  el.textContent = emoji;
+  el.style.left = (35 + Math.random() * 30) + '%';
+  el.style.bottom = '30%';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1600);
+}
+
+function sendMessage() {
+  const input = document.getElementById('cheerMsg');
+  const text = input.value.trim();
+  if (!text) return;
+  
+  // Ask for name (cached)
+  let name = localStorage.getItem('scie-cheer-name');
+  if (!name) {
+    name = prompt('你的称呼是？（如：妈妈、爸爸、好朋友小明）');
+    if (!name) return;
+    localStorage.setItem('scie-cheer-name', name);
+  }
+  
+  const data = loadCheerData();
+  data.messages = data.messages || [];
+  const now = new Date();
+  const time = `${now.getMonth()+1}.${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+  data.messages.push({ name, text, time });
+  data.count = (data.count || 0) + 1;
+  saveCheerData(data);
+  
+  input.value = '';
+  renderCheerData();
+  showToast('💌 留言成功！');
+  confettiBurst();
+}
+
 // ============ INIT ============
 loadState();
 render();
+renderCheerData();
 
 // Auto-expand current week
 const now = new Date();
