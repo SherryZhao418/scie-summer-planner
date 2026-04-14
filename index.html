@@ -27,12 +27,12 @@
   
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #a8d8f0;
+    background: #c5dce8;
     color: var(--text);
     min-height: 100vh;
     -webkit-tap-highlight-color: transparent;
     background-image: 
-      radial-gradient(ellipse at 20% 0%, rgba(100,180,255,0.3) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(140,200,255,0.2) 0%, transparent 50%), linear-gradient(180deg, #87CEEB 0%, #a8d8f0 30%, #c4e4f7 60%, #dceefb 90%, #e8f3fc 100%);
+      radial-gradient(ellipse at 20% 0%, rgba(100,180,255,0.3) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(140,200,255,0.2) 0%, transparent 50%), linear-gradient(180deg, #b0cfe0 0%, #c0d8e8 30%, #cde2ef 60%, #d8eaf2 100%);
     background-attachment: fixed;
   }
 
@@ -43,7 +43,7 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    min-height: 220px;
+    min-height: 240px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -58,30 +58,30 @@
       rgba(0,0,0,0) 0%, 
       rgba(0,0,0,0) 40%,
       rgba(0,30,60,0.15) 70%,
-      rgba(0,30,60,0.35) 100%);
+      rgba(0,20,50,0.45) 100%);
     z-index: 0;
   }
   .header::after { display: none; }
   .header h1 {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 800;
     position: relative;
     z-index: 2;
     color: #fff;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.15);
+    text-shadow: 0 3px 24px rgba(0,0,0,0.35), 0 1px 6px rgba(0,0,0,0.25);
     -webkit-text-fill-color: #fff;
     background: none;
     -webkit-background-clip: unset;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     letter-spacing: -0.5px;
   }
   .header .subtitle {
-    font-size: 13px;
+    font-size: 14px;
     color: rgba(255,255,255,0.9);
     position: relative;
     z-index: 2;
-    font-weight: 500;
-    text-shadow: 0 1px 8px rgba(0,0,0,0.15);
+    font-weight: 600; letter-spacing: 2px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.25);
   }
   .header .date-range {
     display: inline-block;
@@ -281,7 +281,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 800;
     background: rgba(37,99,235,0.1);
     color: var(--accent);
@@ -392,12 +392,12 @@
   .checkbox.checked::after {
     content: '✓';
     color: #fff;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
   }
 
   .task-text {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.5;
     flex: 1;
   }
@@ -458,9 +458,9 @@
     flex: 1;
   }
   .time-content .title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
   }
   .time-content .desc {
     font-size: 11px;
@@ -498,7 +498,7 @@
     flex-shrink: 0;
   }
   .song-info .song-name {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
   }
   .song-info .song-artist {
@@ -515,7 +515,7 @@
     margin-bottom: 8px;
   }
   .book-card .book-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     font-style: italic;
   }
@@ -592,7 +592,7 @@
     background: var(--green);
     color: #fff;
     border-radius: 12px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     z-index: 100;
     transition: transform 0.3s ease;
@@ -619,7 +619,7 @@
   /* Floating hearts */
   .float-emoji {
     position: fixed;
-    font-size: 28px;
+    font-size: 32px;
     pointer-events: none;
     z-index: 999;
     animation: floatUp 1.5s ease-out forwards;
@@ -647,7 +647,7 @@
     font-size: 10px;
     font-weight: 700;
     color: var(--accent);
-    margin-bottom: 2px;
+    margin-bottom: 4px;
   }
   .msg-bubble .msg-time {
     font-size: 9px;
