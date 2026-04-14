@@ -730,8 +730,16 @@
       <div class="time-label">10:45</div>
       <div class="time-dot dot-eng"></div>
       <div class="time-content">
-        <div class="title">🇬🇧 英语 · 词汇+阅读</div>
-        <div class="desc">Magoosh 30词 + BBC/原版书精读（60min）</div>
+        <div class="title">📖 词汇书 · 每日1 Chapter</div>
+        <div class="desc">TOEFL词以类记 / Magoosh — 每天1个Chapter，标记生词（30min）</div>
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">11:15</div>
+      <div class="time-dot dot-eng"></div>
+      <div class="time-content">
+        <div class="title">🇬🇧 英语 · 阅读</div>
+        <div class="desc">BBC/原版书精读，标注生词（30min）</div>
       </div>
     </div>
   </div>
@@ -777,6 +785,7 @@
     <h3>💡 每日提醒</h3>
     <div style="font-size:12px;color:var(--text-dim);line-height:1.6">
       • 每天4-5小时有效学习就够，不搞题海战术<br>
+      • <b style="color:var(--accent)">词汇书每天1个Chapter</b>，雷打不动，旅行期间也要坚持<br>
       • 周末至少一天完全放松——去坐过山车！🎢<br>
       • 保持好奇心比多刷10道题更重要<br>
       • 数学做题<b style="color:var(--red)">一定写完整英文步骤</b>，跳步=扣分！
@@ -847,7 +856,7 @@ const WEEKS = [
       { subj: "math", text: "有效数字 + 比例 + 利率计算" },
       { subj: "math", text: "完成20道 Number 练习题" },
       { subj: "math", text: "背诵60个数学英文术语（Quizlet）" },
-      { subj: "eng", text: "TOEFL词汇累计200+" },
+      { subj: "eng", text: "词汇书完成7章（每天1 Chapter）" },
       { subj: "eng", text: "学会完整唱1首英文歌 🎵", fun: true },
       { subj: "eng", text: "英文书阅读进度50%" },
       { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
@@ -862,7 +871,7 @@ const WEEKS = [
       { subj: "math", text: "展开括号（Expanding Brackets）", key: true },
       { subj: "math", text: "化简代数式（Simplifying）" },
       { subj: "math", text: "因式分解——提公因式法", key: true },
-      { subj: "eng", text: "TOEFL词汇累计400+（旅途中用APP碎片学）" },
+      { subj: "eng", text: "词汇书完成14章（旅途中也要打卡！）" },
       { subj: "eng", text: "英语歌精听2首新歌（飞机上听）" },
       { subj: "eng", text: "第一本英文书读完 + 写3句读后感" },
       { subj: "act", text: "🇯🇵 北海道旅行见闻：拍照+写英文日记 ✈️", fun: true },
@@ -877,7 +886,7 @@ const WEEKS = [
       { subj: "act", text: "整理旅行照片+写一篇英文游记（回来后）" },
       { subj: "math", text: "一元一次方程 + 一元二次方程（回来后恢复）", key: true },
       { subj: "math", text: "联立方程（消元法+代入法）", key: true },
-      { subj: "eng", text: "TOEFL词汇累计600+" },
+      { subj: "eng", text: "词汇书完成21章" },
       { subj: "eng", text: "启动第二本书 Tuesdays with Morrie" },
       { subj: "piano", text: "🎹 钢琴练习 2次 × 30min（回来后恢复）" },
       { subj: "vlog", text: "📹 Vlog #4「北海道回忆」旅行Highlights剪辑+英文旁白尝试", fun: true },
@@ -890,7 +899,7 @@ const WEEKS = [
       { subj: "math", text: "数列 nth term 公式" },
       { subj: "math", text: "代数分式（Algebraic Fractions）" },
       { subj: "math", text: "30道 Algebra 综合练习" },
-      { subj: "eng", text: "TOEFL词汇累计800+" },
+      { subj: "eng", text: "词汇书完成28章" },
       { subj: "eng", text: "第二首完整学会的英文歌 🎵", fun: true },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "vlog", text: "📹 Vlog #5「挑战英语歌」录一段翻唱+学习过程花絮", fun: true },
@@ -903,7 +912,7 @@ const WEEKS = [
       { subj: "math", text: "角度关系 + 三角形 + 四边形" },
       { subj: "math", text: "圆的性质（Circle Theorems）", key: true },
       { subj: "math", text: "面积与体积计算" },
-      { subj: "eng", text: "TOEFL词汇累计1000+" },
+      { subj: "eng", text: "词汇书完成35章" },
       { subj: "eng", text: "第二本英文书完成" },
       { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
@@ -917,7 +926,7 @@ const WEEKS = [
       { subj: "math", text: "坐标几何：直线方程 y=mx+c + 斜率", key: true },
       { subj: "math", text: "做一套 IGCSE 数学模拟卷（计时！）", key: true },
       { subj: "math", text: "对比 Week 1 诊断卷，记录进步 📈" },
-      { subj: "eng", text: "TOEFL词汇累计1200+" },
+      { subj: "eng", text: "词汇书完成42章" },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "vlog", text: "📹 Vlog #7「7周进步报告」展示数学成绩对比+Phase 1心得", fun: true },
       { subj: "act", text: "活动项目第二次更新" },
@@ -944,7 +953,7 @@ const WEEKS = [
       { subj: "math", text: "平均数/中位数/众数 + 频率直方图" },
       { subj: "math", text: "概率计算 + 树状图" },
       { subj: "eng", text: "TPO 听力1个 Lecture 精听" },
-      { subj: "eng", text: "TOEFL词汇累计1500+" },
+      { subj: "eng", text: "词汇书完成49章" },
       { subj: "sci", text: "物理预习：Energy（能量转化）" },
       { subj: "sci", text: "化学术语背诵（每周1小时）" },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
@@ -968,7 +977,7 @@ const WEEKS = [
     num: 11, title: "🇺🇸 圆石滩·Week 2", date: "6.22 - 6.28", phase: 2,
     tasks: [
       { subj: "eng", text: "每天用英文和当地人对话至少3次 🗣️", fun: true },
-      { subj: "eng", text: "Magoosh词汇：每天15词（碎片时间）" },
+      { subj: "eng", text: "词汇书每天1 Chapter（碎片时间打卡）" },
       { subj: "eng", text: "英文旅行日记持续写（记录有趣的表达）" },
       { subj: "eng", text: "逛一家当地书店，买一本感兴趣的英文书 📚", fun: true },
       { subj: "math", text: "轻量数学：每天3道混合题保持手感（用APP）" },
@@ -979,7 +988,7 @@ const WEEKS = [
     num: 12, title: "🇺🇸 圆石滩·Week 3", date: "6.29 - 7.5", phase: 2,
     tasks: [
       { subj: "eng", text: "全英文点餐/问路/购物——实战口语 🗣️", fun: true },
-      { subj: "eng", text: "Magoosh词汇保持：每天15词" },
+      { subj: "eng", text: "词汇书每天1 Chapter 坚持打卡" },
       { subj: "eng", text: "英文旅行日记持续" },
       { subj: "eng", text: "🎵 找一首在美国听到的歌，精听学会它", fun: true },
       { subj: "math", text: "轻量数学：每天3道题（不用多，保手感就行）" },
@@ -990,7 +999,7 @@ const WEEKS = [
     num: 13, title: "🇺🇸 圆石滩·Week 4", date: "7.6 - 7.12", phase: 2,
     tasks: [
       { subj: "eng", text: "口语挑战：用英文完整描述一天的行程（录音）" },
-      { subj: "eng", text: "TOEFL词汇累计2000+（旅途积累也算！）" },
+      { subj: "eng", text: "词汇书完成56章（旅途也坚持打卡！）" },
       { subj: "eng", text: "英文旅行日记——写一篇最难忘的经历（200字+）", key: true },
       { subj: "math", text: "轻量数学保持" },
       { subj: "vlog", text: "📹 Vlog #13「一个月美国生活」360°回顾最爱的地方+英文旁白总结", fun: true },
@@ -1031,7 +1040,7 @@ const WEEKS = [
       { subj: "act", text: "了解宿舍规则和作息时间" },
       { subj: "eng", text: "写一篇英文自我介绍" },
       { subj: "math", text: "最后一次 IGCSE 数学全面测评" },
-      { subj: "eng", text: "TOEFL词汇累计2500+" },
+      { subj: "eng", text: "词汇书完成70章+" },
       { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "vlog", text: "📹 Vlog #16「开箱宿舍装备」360°拍打包行李+开学必备好物", fun: true },
