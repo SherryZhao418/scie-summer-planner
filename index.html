@@ -963,6 +963,7 @@ const WEEKS = [
       { subj: "eng", text: "选3首喜欢的英文歌开始精听" },
       { subj: "eng", text: "选第一本英文书开始读 <a href='https://search.jd.com/Search?keyword=The+Alchemist+Paulo+Coelho+英文原版' target='_blank' style='color:var(--red);'>🛒京东</a> · <a href='https://www.amazon.com/s?k=The+Alchemist+Paulo+Coelho' target='_blank' style='color:var(--orange);'>📦Amazon</a>" },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min（本周曲目自选）" },
+      { subj: "sci", text: "🔬 看1个物理趣味视频：<a href='https://www.youtube.com/@veritasium' target='_blank' style='color:var(--accent);'>Veritasium</a> 或 <a href='https://www.youtube.com/@MarkRober' target='_blank' style='color:var(--accent);'>Mark Rober</a>", fun: true },
       { subj: "vlog", text: "📹 Vlog #1「暑假第一天」开箱新装备+立下暑期目标", fun: true },
       { subj: "vlog", text: "🎬 账号设置：注册<a href='https://www.xiaohongshu.com' target='_blank' style='color:var(--accent);'>小红书</a> / <a href='https://www.bilibili.com' target='_blank' style='color:var(--accent);'>B站</a> / <a href='https://www.youtube.com' target='_blank' style='color:var(--accent);'>YouTube</a>，确定账号名和定位" },
     ]
@@ -978,6 +979,7 @@ const WEEKS = [
       { subj: "eng", text: "学会完整唱1首英文歌 🎵", fun: true },
       { subj: "eng", text: "英文书阅读进度50%" },
       { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
+      { subj: "sci", text: "🔬 物理兴趣：看 <a href='https://ed.ted.com/best_of_web/Acrfo8Xj' target='_blank' style='color:var(--accent);'>TED-Ed过山车物理学</a>", fun: true },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "vlog", text: "📹 Vlog #2「我的学习角」360°展示书桌/学习装备/每日Routine", fun: true },
       { subj: "math", text: "周日做 Number 模块小测" },
@@ -1021,6 +1023,7 @@ const WEEKS = [
       { subj: "eng", text: "第二首完整学会的英文歌 🎵", fun: true },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "vlog", text: "📹 Vlog #5「挑战英语歌」录一段翻唱+学习过程花絮", fun: true },
+      { subj: "sci", text: "💰 经济学入门：看 <a href='https://www.youtube.com/@CrashCourse' target='_blank' style='color:var(--accent);'>Crash Course Economics</a> 第1集", fun: true },
       { subj: "act", text: "确定暑期个人项目方向" },
     ]
   },
@@ -1035,6 +1038,8 @@ const WEEKS = [
       { subj: "eng", text: "🎬 看一部推荐英文电影（开英文字幕）", fun: true },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "vlog", text: "📹 Vlog #6「过山车物理学」去游乐园！360°拍过山车+讲解物理原理", fun: true },
+      { subj: "sci", text: "🌍 地理入门：看 <a href='https://www.youtube.com/@GeographyNow' target='_blank' style='color:var(--accent);'>Geography Now</a> 一集", fun: true },
+      { subj: "sci", text: "💻 CS入门：试玩 <a href='https://scratch.mit.edu/' target='_blank' style='color:var(--accent);'>Scratch编程</a>（30min）", fun: true },
       { subj: "act", text: "活动项目：注册平台/发布第一篇内容 🚀", key: true },
     ]
   },
@@ -1047,6 +1052,7 @@ const WEEKS = [
       { subj: "eng", text: "词汇书完成42章" },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "vlog", text: "📹 Vlog #7「7周进步报告」展示数学成绩对比+Phase 1心得", fun: true },
+      { subj: "sci", text: "🔬 物理趣味：看 <a href='https://www.youtube.com/@smartereveryday' target='_blank' style='color:var(--accent);'>SmarterEveryDay</a> 一集（慢动作物理）", fun: true },
       { subj: "act", text: "活动项目第二次更新" },
       { subj: "act", text: "🎢 奖励自己！去坐过山车！", fun: true },
     ]
@@ -1062,6 +1068,7 @@ const WEEKS = [
       { subj: "sci", text: "物理预习：Forces & Motion <a href='https://phet.colorado.edu/zh_CN/simulations/filter?subjects=physics' target='_blank' style='color:var(--accent);'>🆓PhET模拟实验</a>" },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min" },
       { subj: "vlog", text: "📹 Vlog #8「我的一天」完整记录一天学习生活（Time-lapse + 360°）", fun: true },
+      { subj: "sci", text: "🧪 化学兴趣：看 <a href='https://www.youtube.com/@NileRed' target='_blank' style='color:var(--accent);'>NileRed</a> 一个趣味实验视频", fun: true },
       { subj: "act", text: "活动项目持续更新" },
     ]
   },
@@ -1146,6 +1153,8 @@ const WEEKS = [
       { subj: "eng", text: "启动第五本书 The Great Gatsby" },
       { subj: "sci", text: "物理预习：Waves <a href='https://phet.colorado.edu/zh_CN/simulations/filter?subjects=physics' target='_blank' style='color:var(--accent);'>🆓PhET模拟</a> 🎵" },
       { subj: "act", text: "看学长学姐分享（公众号/小红书/B站）" },
+      { subj: "sci", text: "🔬 看 <a href='https://www.youtube.com/@cognaborhello' target='_blank' style='color:var(--accent);'>Cognito</a> 物理+化学复习视频各2个" },
+      { subj: "sci", text: "💰 看 <a href='https://www.youtube.com/@EconplusDal' target='_blank' style='color:var(--accent);'>EconplusDal</a> 经济学IGCSE入门视频" },
       { subj: "act", text: "列出想尝试的社团清单" },
       { subj: "piano", text: "🎹 钢琴练习 3次 × 30min（全面恢复）" },
       { subj: "vlog", text: "📹 Vlog #15「冲刺模式」360°拍全力备战的一天+TPO模考实录", fun: true },
