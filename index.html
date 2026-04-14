@@ -76,7 +76,7 @@ body{font-family:'Nunito',-apple-system,BlinkMacSystemFont,sans-serif;background
 .cd.h2{background:rgba(16,185,129,0.25);}
 .cd.h3{background:rgba(16,185,129,0.4);}
 .cd.h4{background:rgba(16,185,129,0.55);color:#fff;}
-.cd.travel-bg{background:linear-gradient(135deg,rgba(253,203,110,0.25),rgba(225,112,85,0.18));}
+.cd.travel-bg{background:linear-gradient(135deg,rgba(253,203,110,0.3),rgba(251,191,36,0.2));border-color:rgba(251,191,36,0.3);}
 .cd .cd-flag{font-size:8px;line-height:1;margin-top:1px;}
 .cd .cd-check{position:absolute;top:1px;right:2px;font-size:7px;}
 
@@ -322,12 +322,12 @@ function renderCal(){
     const dstr=ds(dt),ts=tasks(dt),tr=tv(dt),isT=dt.getTime()===today.getTime(),isSel=selDay===dstr;
     let dn=0;ts.forEach((_,i)=>{if(ic(dstr,i))dn++;});
     const pct=ts.length?dn/ts.length:0;
-    // Heat level
-    let hl='h0';if(pct>0&&pct<0.25)hl='h1';else if(pct>=0.25&&pct<0.5)hl='h2';else if(pct>=0.5&&pct<0.75)hl='h3';else if(pct>=0.75)hl='h4';
+    // Heat level — travel days skip heat, use travel-bg instead
+    let hl='h0';if(!tr){if(pct>0&&pct<0.25)hl='h1';else if(pct>=0.25&&pct<0.5)hl='h2';else if(pct>=0.5&&pct<0.75)hl='h3';else if(pct>=0.75)hl='h4';}
     // Is in range?
     const inRange=dt>=S&&dt<=E;
-    let cls=`cd ${inRange?hl:''}${isT?' today':''}${isSel?' sel':''}${tr&&inRange?' travel-bg':''}${!inRange?' outside':''}`;
-    h+=`<div class="${cls}" onclick="${inRange?`sel('${dstr}')`:''}">${d}${tr&&inRange?`<span class="cd-flag">${tr.f}</span>`:''}${dn===ts.length&&ts.length>0&&inRange?'<span class="cd-check">✅</span>':''}</div>`;
+    let cls=`cd ${inRange&&!tr?hl:''}${isT?' today':''}${isSel?' sel':''}${tr&&inRange?' travel-bg':''}${!inRange?' outside':''}`;
+    h+=`<div class="${cls}" onclick="${inRange?`sel('${dstr}')`:''}">${d}${tr&&inRange?`<span class="cd-flag">${tr.f}😊</span>`:''}${dn===ts.length&&ts.length>0&&inRange&&!tr?'<span class="cd-check">✅</span>':''}</div>`;
   }
   // Padding after
   let ed=last.getDay();ed=ed===0?6:ed-1;
